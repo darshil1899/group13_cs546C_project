@@ -1,40 +1,30 @@
 const mongoCollections = require("../config/mongoCollections.js");
-const doctors = mongoCollections.doctors;
+const patients = mongoCollections.patients_doctors;
 let { ObjectId } = require("mongodb");
 
 async function create(patientID, diseases_name, score) {
-  const insertrest = await doctors();
-
-  let id = ObjectId();
-  let newrev = {
-    _id: id,
+  const patientscol = await patients();
+  let objid = ObjectId(patientID);
+  let doc = {
+    _id: ObjectId(),
     diseases_name: diseases_name,
-    score: score,
+    score: parseInt(score),
   };
-  let restId = ObjectId(patientID);
-
-  const restidd = ObjectId(patientID);
-  const insertinfo = await insertrest.updateOne(
-    { _id: restidd },
-    { $addToSet: { diseases: newrev } }
+  const adddisease = await patientscol.updateOne(
+    { _id: objid },
+    { $push: { diseases: doc } }
   );
-  const restCollection = await doctors();
-  //const x = await restCollection.findOne({ _id: restId });
 
-  // // let y = x.diseases;
+  const scor = await patientscol.updateOne({ _id: ObjectId(patientID) }, [
+    { $set: { totalscore: { $sum: "$diseases.score" } } },
+  ]);
 
-  // // const rate = await insertrest.updateOne({ _id: ObjectId(patientID) }, [
-  // //   { $set: { score: { $avg: "$diseases.score" } } },
-  // // ]);
-
-  const t = await restCollection.findOne({ _id: restId });
-
-  t._id = t._id.toString();
-  d = t.diseases;
-  for (f = 0; f < d.length; f++) {
-    d[f]._id = d[f]._id.toString();
+  let rest = await patientscol.findOne({ _id: objid });
+  rest._id = rest._id.toString();
+  for (let i = 0; i < rest.diseases.length; i++) {
+    rest.diseases[i]._id = rest.diseases[i]._id.toString();
   }
-  return t;
+  return true;
 }
 module.exports = {
   create,

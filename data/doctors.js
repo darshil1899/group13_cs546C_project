@@ -13,6 +13,37 @@ async function create(
   diseases,
   room
 ) {
+  if (
+    !firstname ||
+    !lastname ||
+    !dateOfBirth ||
+    !sex ||
+    !hospitalNumber ||
+    !diseases ||
+    !room
+  )
+    throw "Please enter a vaild input";
+
+  if (
+    firstname.trim() == "" ||
+    lastname.trim() == "" ||
+    hospitalNumber.trim() == "" ||
+    room.trim() == ""
+  )
+    throw "Do not enter blank values";
+
+  // let regexp = /\s/g;
+  // if (!firstname.match(regexp) || !lastname.match(regexp))
+  //   throw "Invalid input with spaces";
+
+  // let regEx = /^[a-zA-Z]+$/;
+  // if (!firstname.match(regEx) || !lastname.match(regEx))
+  //   throw "Please enter only letters";
+
+  // let reggg = /^\d*$/;
+  // if (!hospitalNumber.match(reggg) || !room.match(reggg))
+  //   throw "Only numbers are allowed ";
+
   let totalscore = 0;
   diseases[0]["_id"] = new ObjectId();
   const newPatient = {
@@ -27,9 +58,25 @@ async function create(
     diseases: diseases,
   };
 
-  // Inserting our new object & returning it with the _id
   const PatientCollection = await patients_doctors();
+  let allUsers = await PatientCollection.find({}).toArray();
+  for (let i = 0; i < allUsers.length; i++) {
+    if (allUsers[i].hospitalNumber == hospitalNumber) {
+      throw {
+        message: "There is already a patient with that Hopsital number",
+        error: 400,
+      };
+    }
+  }
 
+  for (let i = 0; i < allUsers.length; i++) {
+    if (allUsers[i].room == room) {
+      throw {
+        message: "The room is already occupied",
+        error: 400,
+      };
+    }
+  }
   const insertPatient = await PatientCollection.insertOne(newPatient);
 
   if (insertPatient.insertedCount === 0) {
@@ -57,7 +104,6 @@ async function getAllPatients() {
 }
 
 async function get(id) {
-  // check for errors
   if (id === undefined || id === null) throw "Given id parameter is invalid";
 
   if (!ObjectId.isValid(id)) {
@@ -70,7 +116,6 @@ async function get(id) {
     throw "Invalid input id";
   }
 
-  // to find by id & store in 'hospital'
   const PatientCollection = await patients_doctors();
   const Patient = await PatientCollection.findOne({ _id: id });
 
@@ -79,7 +124,6 @@ async function get(id) {
   }
   Patient._id = Patient._id.toString();
 
-  // to string the reviewObject._id
   if (Patient.diseases.length > 0) {
     for (let i in Patient.diseases) {
       Patient.diseases[i]._id = Patient.diseases[i]._id.toString();
@@ -93,7 +137,7 @@ async function bookRoom(id) {
   const allBookedPatients = await PatientCollection.find({
     roomBooked: true,
   }).toArray();
-  if (allBookedPatients.length >= 1) {
+  if (allBookedPatients.length >= 10) {
     throw `No rooms available.`;
   }
   const Patient = await PatientCollection.updateOne(

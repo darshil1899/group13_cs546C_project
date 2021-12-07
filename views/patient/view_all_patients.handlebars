@@ -1,0 +1,17 @@
+<h1>All Patient Info:</h1>
+<button><a href="/users/logout">Logout</a></button>
+
+{{#each patients}}
+  <h3>Name:
+    <a href="/doctors/view_patient/{{this._id}}">{{this.firstname}}
+      {{this.lastname}}</a></h3>
+  <p>Hospital Number: {{this.hospitalNumber}}</p>
+  <p>Score: {{this.totalscore}}</p>
+{{/each}}
+
+<div>
+  {{#if hasErrors}}
+    <p class="error"> {{errors}}.</p>
+
+  {{/if}}
+</div>

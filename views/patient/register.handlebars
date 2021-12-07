@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <title>Register a Patient here</title>
+
+  </head>
+
+  <div class="book">
+    <div class="book-app">
+      <h1><u>Register a Patient here</u></h1>
+      <form action="/doctors/register_patient" method="post">
+        <label>First Name</label>
+        <input type="text" name="firstname" placeholder="First name" />
+        <br></br>
+        <label>Last Name</label>
+        <input type="text" name="lastname" placeholder="Last name" />
+         <br></br>
+        <label>Date of Birth</label>
+        <input type="date" name="dateofbirth" placeholder="Birthday" />
+ <br></br>
+        <label>Sex</label>
+        <select name="sex">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Others</option>
+        </select>
+ <br></br>
+        <label>Patient Unique Number</label>
+        <input
+          type="text"
+          name="patientuniquenumber"
+          placeholder="Patient Unique Number"
+        />
+ <br></br>
+        {{! <label>Room number</label>
+        <input type="text" name="roomnumber" placeholder="Room number" /> }}
+
+        <label>Disease name</label>
+        <input type="text" name="diseasename" placeholder="Disease name" />
+ <br></br>
+        <label>Disease Score</label>
+        <input type="text" name="diseasescore" placeholder="Disease Score" />
+ <br></br>
+        <div>
+          {{#if hasErrors}}
+            <p class="error"> {{errors}}.</p>
+          {{/if}}
+        </div>
+
+        <input type="submit" value="LogIn" />
+
+        <nav><button><a href="/users/logout">Logout</a></button></nav>
+      </form>
+
+    </div>
+  </div>
+
+</html>

@@ -1,0 +1,41 @@
+<h1>Patient info for {{patient.firstname}} {{patient.lastname}}</h1>
+
+<p>Date of Birth:{{patient.dateOfBirth}}</p>
+<p>Gender: {{patient.sex}}</p>
+<p>Patient Unique Number: {{patient.hospitalNumber}}</p>
+{{!-- <p>{{patient.room}}</p> --}}
+<p>Room Booked: {{patient.roomBooked}}</p>
+<p>{{patient.disease_name}}</p>
+<p>Total Score: {{patient.totalscore}}</p>
+
+{{#each patient.diseases}}
+  <p>{{this.disease_name}}: <span>{{this.disease_score}}</span></p>
+{{/each}}
+
+<button id="updatePatientInfo">Update Info</button>
+<div id="updateform" hidden>
+  <form action="/doctors/view_patient/{{patient._id}}" method="post">
+    <input type="text" name="diseasename" placeholder="Disease Name" />
+    <input type="text" name="diseasescore" placeholder="Disease Score" />
+    <input type="hidden" name="_method" value="PUT" />
+    <input type="submit" />
+  </form>
+</div>
+
+<div>
+  {{#if hasErrors}}
+    <p class="error"> {{errors}}.</p>
+
+  {{/if}}
+</div>
+
+<form action="/doctors/view_patient/{{patient._id}}/bookRoom" method="POST">
+  <input type="hidden" value="{{patient._id}}" name="patientId" />
+  <input type="submit" value="Book Room" />
+</form>
+
+<script>
+  let form = document.getElementById('updateform'); let button =
+  document.getElementById('updatePatientInfo'); button.onclick = (event) => { if
+  (form.hidden) { form.hidden = false; } else { form.hidden = true; } }
+</script>

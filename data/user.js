@@ -1,3 +1,4 @@
+const {ObjectId} = require('bson');
 const bcryptjs= require("bcryptjs");
 const saltRounds = 5;
 const mongoCollections = require('../config/mongoCollections');
@@ -6,7 +7,7 @@ const appointments = mongoCollections.appointments;
 
 module.exports={
 
-async  createUser(username,password){
+async  createUser(username,password, firstname, lastname, city, phonenumber, gender, dateofbirth, email){
     if (typeof username !== 'string'|| typeof password !== 'string')
     {
         throw 'Username should be a string';
@@ -46,13 +47,13 @@ async  createUser(username,password){
     {
         throw 'password should contain at least 6 characters';
     }
-    if(!(phonenumber.match(`^([0-9]{3})-([0-9]{3})-([0-9]{4})$`))) {
-        throw 'You must provide the phone number in given format.'}
-    
     let ptn = "^[a-zA-Z0-9]*$"
     if (username.match(ptn) === null) {
         throw 'username should contain only alphanumeric characters';
     }
+    if(!(phonenumber.match(`^([0-9]{3})-([0-9]{3})-([0-9]{4})$`))) {
+        throw 'You must provide the phone number in given format.'}
+    
 
 const userCollection= await users();
 const appointmentCollection=await appointments();
@@ -60,7 +61,14 @@ const User = username.toLowerCase();
 const Pswd = await bcryptjs.hash(password, saltRounds);
 let newUser={
     username : User,
-    password : Pswd
+    password : Pswd,
+    firstname : firstname,
+    lastname : lastname,
+    city: city,
+    dateofbirth : dateofbirth,
+    email : email,
+    phonenumber : phonenumber,
+    gender : gender
 }
 
     let present=await userCollection.findOne({username: username });

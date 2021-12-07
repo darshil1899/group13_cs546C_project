@@ -61,3 +61,32 @@ let newUser={
 
 
 }
+async checkUser(username, password){
+  
+    if (typeof username !== 'string' || typeof password != 'string') {
+        throw 'username and password should be a string';
+    }
+    if (username.length === 0 || password.length === 0) 
+   {
+        throw 'username and password  is empty';
+    }
+    if (username.trim().length === 0) 
+   {
+        throw 'username cannot be empty';
+    }
+    if (username.length<= 3) 
+   {
+        throw 'username should have atleast 4 characters';
+    }
+    if (password.length<= 5) 
+    {
+        throw 'password should have atleast 6 characters';
+    }
+    if (/\s/.test(username))
+    {
+        throw 'username has white spaces';
+    }
+    if (/\s/.test(password))
+    {
+        throw 'password has white spaces';
+    }

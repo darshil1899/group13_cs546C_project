@@ -19,6 +19,17 @@ async  createUser(username,password){
     {
         throw 'Username cannot have empty spaces';
     }
+
+    let regEx = /^[a-zA-Z]+$/;
+  if (!username.match(regEx))
+   {
+  throw "Please enter letters and numbers only";
+  }
+  let regexp = /\s/g;
+{
+    if (password.match(regexp))
+     throw " password is not valid";
+  }
     if (/\s/.test(username)) 
     {
         throw 'Username cannot have white spaces';
@@ -87,19 +98,36 @@ async checkUser(username, password){
     {
         throw 'password has white spaces';
     }
+    let regEx = /^[a-zA-Z]+$/;
+    if (!username.match(regEx))
+     {
+    throw "Please enter letters and numbers only";
+    }
+    let regexp = /\s/g;
+    {
+      if (password.match(regexp))
+       throw " password is not valid";
+    }
+
     const userCollection= await users();
     let name = await userCollection.findOne({username:username});
     console.log(name);
     let compare = false;
-    try{
+    try
+    {
         compare = await bcrypt.compare(password,name.password)
     }
-    catch(e){
+    catch(e)
+    {
         console.log(e);
     }
+
 if(compare)
+{
     return{authenticated:true};
-else{
+}
+else
+{
     throw "Invaild password or username";
 }
 

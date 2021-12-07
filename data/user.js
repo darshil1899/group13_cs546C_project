@@ -104,3 +104,33 @@ else{
 }
 
 },
+async updateProfile(id,firstname, lastname, username, dateofbirth,gender,city, email, phonenumber){
+
+    const proInfo = await this.get(id);
+    let proLower = users.toLowerCase();
+    
+    let proUpdate =
+     {
+        
+    firstname: firstname,
+    lastname: lastname,
+    username: username,
+    dateofbirth: dateofbirth,
+    city: city,
+    gender: gender,
+    email: email,
+    phonenumber : phonenumber
+    
+    }
+    
+    const userCollection= await users();
+    const proUpdateInfo = await userCollection.updateOne(
+        {_id:ObjectId(id)},
+        {$set :  proUpdate}
+    );
+    
+    if(!proUpdateInfo.matchedCount && !proUpdateInfo.modifiedCount)
+    throw 'updation failed';
+    return {updateInserted : true};
+    },
+}

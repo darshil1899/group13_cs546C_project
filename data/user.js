@@ -58,9 +58,6 @@ let newUser={
     return {userInserted:true};
 },
 
-
-
-}
 async checkUser(username, password){
   
     if (typeof username !== 'string' || typeof password != 'string') {
@@ -90,3 +87,20 @@ async checkUser(username, password){
     {
         throw 'password has white spaces';
     }
+    const userCollection= await users();
+    let name = await userCollection.findOne({username:username});
+    console.log(name);
+    let compare = false;
+    try{
+        compare = await bcrypt.compare(password,name.password)
+    }
+    catch(e){
+        console.log(e);
+    }
+if(compare)
+    return{authenticated:true};
+else{
+    throw "Invaild password or username";
+}
+
+},

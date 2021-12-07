@@ -46,6 +46,9 @@ async  createUser(username,password){
     {
         throw 'password should contain at least 6 characters';
     }
+    if(!(phonenumber.match(`^([0-9]{3})-([0-9]{3})-([0-9]{4})$`))) {
+        throw 'You must provide the phone number in given format.'}
+    
     let ptn = "^[a-zA-Z0-9]*$"
     if (username.match(ptn) === null) {
         throw 'username should contain only alphanumeric characters';

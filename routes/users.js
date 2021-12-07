@@ -15,30 +15,6 @@ router.get('/', async (req, res) => {
         return;
     }
 });
-
-router.post('/login', async (req, res) => {
-    try {
-        if (!req.body.username || !req.body.password) {
-            res.status(400).render("login/login", { error: "Username or Password is not provided " });
-            return;
-        }
-        const User = await data.checkUser(req.body.username, req.body.password);
-
-        if (User.authenticated) {
-
-            req.session.username = req.body.username.toLowerCase();
-
-            res.redirect("/patient");
-            return;
-        }
-    }
-    catch (e) {
-        console.log(e)
-        res.status(400).render("login/login", { error: "Username and password is not valid" });
-        return;
-    }
-});
-
 router.get('/patient', async (req, res) => {
     try {
         let sess = req.session;

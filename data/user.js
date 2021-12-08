@@ -173,3 +173,38 @@ async updateProfile(id,firstname, lastname, username, dateofbirth,gender,city, e
     return {updateInserted : true};
     },
 }
+async  appointmentconf(firstname, lastname, dateofbirth,gender, email, phonenumber, problem, doctor, date, time){
+        
+        if (firstname.trim().length === 0)
+        {
+            throw 'firstname cannot have empty spaces';
+        }
+        if (/\s/.test(firstname)) 
+        {
+            throw 'firstname cannot have white spaces';
+        }
+        if (lastname.trim().length === 0)
+        {
+            throw 'lastname cannot have empty spaces';
+        }
+        if (/\s/.test(lastname)) 
+        {
+            throw 'lastname cannot have white spaces';
+        }
+        if (email.trim().length === 0)
+        {
+            throw 'email cannot have empty spaces';
+        }
+        if (/\s/.test(email)) 
+        {
+            throw 'email cannot have white spaces';
+        }
+        if (phonenumber.trim().length === 0)
+        {
+            throw 'phonenumber cannot have empty spaces';
+        }
+        if (/\s/.test(phonenumber)) 
+        {
+            throw 'phonenumber cannot have white spaces';
+        }
+    }

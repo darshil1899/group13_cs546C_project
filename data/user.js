@@ -174,7 +174,16 @@ async updateProfile(id,firstname, lastname, username, dateofbirth,gender,city, e
     },
 }
 async  appointmentconf(firstname, lastname, dateofbirth,gender, email, phonenumber, problem, doctor, date, time){
-        
+    if (typeof firstname !== 'string'|| typeof lastname !== 'string' || typeof dateofbirth !== 'date' || typeof gender !== 'string' || typeof email !== 'email' || typeof phonenumber !== 'number'
+    || typeof problem !== 'string'|| typeof doctor !== 'string'|| typeof date !== 'date'|| typeof time !== 'string')
+    {
+        throw 'Username should be a string';
+    }
+    if(!firstname || !lastname ||!dateofbirth ||!email||!phonenumber||!gender||!problem||!doctor ||!date||!time)throw"provide a valid data"
+    if (firstname.length === 0 || lastname.length === 0||email.length===0||phonenumber.length ===0) 
+   {
+        throw 'Username and password cannot be a empty string';
+    }
         if (firstname.trim().length === 0)
         {
             throw 'firstname cannot have empty spaces';
@@ -207,4 +216,19 @@ async  appointmentconf(firstname, lastname, dateofbirth,gender, email, phonenumb
         {
             throw 'phonenumber cannot have white spaces';
         }
-    }
+        if (firstname.length < 4)
+            {
+                throw 'firstname should contain at least 4 characters';
+            }
+            if (lastname.length < 4)
+            {
+                throw 'lastname should contain at least 4 characters';
+            }
+            if (phonenumber.length < 9)
+            {
+                throw 'password should contain at least 10 characters';
+            }
+            let ptn = "^[a-zA-Z0-9]*$"
+            if (username.match(ptn) === null) {
+                throw 'username should contain only alphanumeric characters';
+            }

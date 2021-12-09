@@ -1,7 +1,6 @@
 const mongoCollections = require("../config/mongoCollections.js");
 const patients_doctors = mongoCollections.patients_doctors;
 const { ObjectId } = require("mongodb");
-
 const collections = require("../config/mongoCollections");
 
 async function create(
@@ -11,7 +10,7 @@ async function create(
   sex,
   hospitalNumber,
   diseases,
-  room
+  emailid
 ) {
   if (
     !firstname ||
@@ -20,7 +19,7 @@ async function create(
     !sex ||
     !hospitalNumber ||
     !diseases ||
-    !room
+    !emailid
   )
     throw "Please enter a vaild input";
 
@@ -28,7 +27,7 @@ async function create(
     firstname.trim() == "" ||
     lastname.trim() == "" ||
     hospitalNumber.trim() == "" ||
-    room.trim() == ""
+    emailid == ""
   )
     throw "Do not enter blank values";
 
@@ -52,7 +51,7 @@ async function create(
     dateOfBirth: dateOfBirth,
     sex: sex,
     hospitalNumber: hospitalNumber,
-    room: room,
+    emailid: emailid,
     roomBooked: false,
     totalscore: diseases[0]["disease_score"],
     diseases: diseases,
@@ -69,14 +68,6 @@ async function create(
     }
   }
 
-  for (let i = 0; i < allUsers.length; i++) {
-    if (allUsers[i].room == room) {
-      throw {
-        message: "The room is already occupied",
-        error: 400,
-      };
-    }
-  }
   const insertPatient = await PatientCollection.insertOne(newPatient);
 
   if (insertPatient.insertedCount === 0) {
@@ -137,19 +128,81 @@ async function bookRoom(id) {
   const allBookedPatients = await PatientCollection.find({
     roomBooked: true,
   }).toArray();
-  if (allBookedPatients.length >= 10) {
+  if (allBookedPatients.length >= 2) {
     throw `No rooms available.`;
   }
+  let dar = await PatientCollection.findOne({
+    _id: new ObjectId(id),
+  });
+  console.log(dar);
   const Patient = await PatientCollection.updateOne(
     { _id: new ObjectId(id) },
-    { $set: { roomBooked: true } }
+    { $set: { roomBooked: !dar.roomBooked } }
   );
-  return { roomBooked: true, patientId: id };
+  return { roomBooked: !dar.roomBooked, patientId: id };
 }
 
+// async function remove(id) {
+//   let h;
+//   let final = {};
+
+//   let d;
+
+//   const r = await patients_doctors();
+//   const revieobj = await r.find({ "reviews._id": ObjectId(id) }).toArray();
+//   let partirev;
+//   for (let i = 0; i < revieobj.length; i++) {
+//     partirev = revieobj[i].reviews;
+//     let j = 0;
+//     const partirevlen = partirev.length;
+//     while (j < partirevlen) {
+//       p = partirev[j]._id;
+//       if (p.toString() === reviewId) {
+//         h = revieobj[i]._id;
+//       }
+//       j++;
+//     }
+//   }
+//   let t;
+//   const restaurantt = await restaurants();
+//   const resttt = await restaurantt.find({}).toArray();
+//   for (i = 0; i < resttt.length; i++) {
+//     a = resttt[i].reviews;
+//     for (p = 0; p < a.length; p++) {
+//       q = a[p]._id;
+//       if (q == reviewId) {
+//         t = resttt[i]._id;
+//         rid = resttt[i]._id;
+//       }
+//     }
+
+//     const obj = ObjectId(reviewId);
+//     const di = await restaurants();
+//     let rest = await di.find({ "reviews._id": ObjectId(reviewId) }).toArray();
+//     const deletionInfo = await di.updateOne(
+//       { _id: h },
+//       { $pull: { reviews: { _id: obj } } }
+//     );
+
+//     if (rest.length === 0) {
+//       const rate = await di.updateOne({ _id: rid }, [
+//         { $set: { overallRating: 0 } },
+//       ]);
+//       throw `Could not delete review with id of ${reviewId}`;
+//     } else {
+//       const rate = await di.updateOne({ _id: rid }, [
+//         { $set: { overallRating: { $avg: "$reviews.rating" } } },
+//       ]);
+//       final.reviewId = reviewId;
+//       final.deleted = true;
+//       return final;
+//     }
+//   }
+//}
 module.exports = {
   create,
   get,
   getAllPatients,
   bookRoom,
+  // remove,
 };

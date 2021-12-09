@@ -3,7 +3,7 @@ const doctors = mongoCollections.doctors;
 const { ObjectId } = require("mongodb");
 const collections = require("../config/mongoCollections");
 const bcrypt = require("bcrypt");
-const saltRounds = 5;
+const saltRounds = 10;
 
 async function create(username, password) {
   if (!username) throw "Provide username";

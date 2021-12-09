@@ -5,14 +5,13 @@ const diseases = require("../data/disease");
 const { restaurants } = require("../config/mongoCollections");
 const connection = require("../config/mongoConnection");
 const doclogin = require("../data/doctor_login");
-
+var nodemailer = require("nodemailer");
 // --------------------------------------------------------------------------------
 
 router.get("/view_patient/:id", async (req, res) => {
   try {
     let userId = req.params.id;
     const patient = await data.get(userId);
-    console.log(patient);
     res.status(200).render("patient/view_single_patient", { patient });
     return;
   } catch (e) {
@@ -24,10 +23,12 @@ router.get("/view_patient/:id", async (req, res) => {
 router.post("/view_patient/:id/bookRoom", async (req, res) => {
   try {
     const book = await data.bookRoom(req.params.id);
-    if (book.roomBooked) {
-      res.redirect(`/doctors/view_patient/${req.params.id}`);
-      return;
-    }
+    res.redirect(`/doctors/view_patient/${req.params.id}`);
+    return;
+    // if (book.roomBooked) {
+    //   res.redirect(`/doctors/view_patient/${req.params.id}`);
+    //   return;
+    // }
   } catch (e) {
     res.render("patient/error_book_patients", { error: e });
     return;
@@ -127,6 +128,7 @@ router.put("/view_patient/:id", async (req, res) => {
 
 router.get("/view_patients", async (req, res) => {
   const allPatients = await data.getAllPatients();
+  allPatients.reverse();
   res
     .status(200)
     .render("patient/view_all_patients", { patients: allPatients });
@@ -181,14 +183,14 @@ router.post("/register_patient", async (req, res) => {
     return;
   }
 
-  if (!payload.roomnumber) {
-    let errors = "No room number is provided ";
-    res.status(400).render("patient/register", {
-      errors: "No room number is provided !",
-      hasErrors: true,
-    });
-    return;
-  }
+  // if (!payload.roomnumber) {
+  //   let errors = "No room number is provided ";
+  //   res.status(400).render("patient/register", {
+  //     errors: "No room number is provided !",
+  //     hasErrors: true,
+  //   });
+  //   return;
+  // }
 
   // if (payload.firstname.trim() == "") {
   //   let errors = "Empty spaces ";
@@ -286,6 +288,29 @@ router.post("/register_patient", async (req, res) => {
     disease_score: parseInt(req.body.diseasescore),
   });
 
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "hopsitalmanagmentsystemcs546@gmail.com",
+      pass: "Sanju@123",
+    },
+  });
+
+  var mailOptions = {
+    from: "hopsitalmanagmentsystemcs546@gmail.com",
+    to: payload.emailid,
+    subject: "Sending Email as confirmation",
+    text: "You have been successfully admited in our hopsital. Thank you for giving us the chance to serve you. We hope you get well soon. ! ",
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+
   try {
     const patient = await data.create(
       payload.firstname,
@@ -294,9 +319,9 @@ router.post("/register_patient", async (req, res) => {
       payload.sex,
       payload.patientuniquenumber,
       diseases,
-      payload.roomnumber
+      payload.emailid
     );
-    console.log(patient);
+
     if (patient) {
       res.redirect("/doctors/view_patients");
       return;

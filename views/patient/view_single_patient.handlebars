@@ -1,9 +1,11 @@
+<button onclick="window.location.href='/doctors/view_patients'">LINK</button>
+
 <h1>Patient info for {{patient.firstname}} {{patient.lastname}}</h1>
 
 <p>Date of Birth:{{patient.dateOfBirth}}</p>
 <p>Gender: {{patient.sex}}</p>
 <p>Patient Unique Number: {{patient.hospitalNumber}}</p>
-{{!-- <p>{{patient.room}}</p> --}}
+<p>{{patient.emailid}}</p>
 <p>Room Booked: {{patient.roomBooked}}</p>
 <p>{{patient.disease_name}}</p>
 <p>Total Score: {{patient.totalscore}}</p>
@@ -12,6 +14,9 @@
   <p>{{this.disease_name}}: <span>{{this.disease_score}}</span></p>
 {{/each}}
 
+<form method="POST" action="/doctors/delete/{{patient._id}}">
+  <button>Delete this patient</button>
+</form>
 <button id="updatePatientInfo">Update Info</button>
 <div id="updateform" hidden>
   <form action="/doctors/view_patient/{{patient._id}}" method="post">

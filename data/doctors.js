@@ -142,6 +142,16 @@ async function bookRoom(id) {
   return { roomBooked: !dar.roomBooked, patientId: id };
 }
 
+async function deletepat(id) {
+  const patientCOl = await patients_doctors();
+  let pat_id = ObjectId(id);
+
+  const delPat = await patientCOl.deleteOne({ _id: pat_id });
+  if (delPat.modifiedCount !== 0) {
+    return true;
+  } else throw "Could not delete patient";
+}
+
 // async function remove(id) {
 //   let h;
 //   let final = {};
@@ -199,10 +209,12 @@ async function bookRoom(id) {
 //     }
 //   }
 //}
+
 module.exports = {
   create,
   get,
   getAllPatients,
   bookRoom,
+  deletepat,
   // remove,
 };

@@ -336,4 +336,18 @@ router.post("/register_patient", async (req, res) => {
   }
 });
 
+router.post("/delete/:id", async (req, res) => {
+  try {
+    let pat_id = req.params.id;
+    console.log(pat_id);
+    const deletedPat = await data.deletepat(pat_id);
+    if (deletedPat == true) {
+      console.log("DELETED");
+      return res.redirect("/doctors/view_patients");
+    }
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 module.exports = router;

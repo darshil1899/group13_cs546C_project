@@ -32,3 +32,26 @@
           </select>
             {{!-- <input name="Address" id="Address" type="text" value="{{userId.gender}}" ) <br> --}}
             <label class = "password-text" for ="email">
+     Email
+            </label>
+            <input name="email" id="email" type="email" value="{{userId.email}}">
+            <br>
+            <label class="password-text" for ="city">
+               city
+            </label>
+            <input name="city" id="city" type="text" value "{{userId.city}}">
+            <br>
+            <label class = "password-text" for="phonenumber">
+            Phone number
+            </label>
+            <input name="phonenumber" id="phonenumber" type="number" value="{{userId.phonenumber}}">
+            <br>
+            <input name = "_method" type="hidden" value = "PUT">
+            <input class ="submit-button" type ="submit" value = "Done">
+            </form>
+            {{#if error}}
+            <div class="error"></div>
+                {{/if}}
+                <p id="success-edit" hidden>Account updated successfully</p>
+                <p id="user-error" hidden>Either the username or password is incorrect</p>
+</article>

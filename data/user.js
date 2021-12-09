@@ -171,9 +171,9 @@ async updateProfile(id,firstname, lastname, username, dateofbirth,gender,city, e
     if(!proUpdateInfo.matchedCount && !proUpdateInfo.modifiedCount)
     throw 'updation failed';
     return {updateInserted : true};
-    },
-}
-async  appointmentconf(firstname, lastname, dateofbirth,gender, email, phonenumber, problem, doctor, date, time){
+    
+},
+async appointmentconf(firstname, lastname, dateofbirth,gender, email, phonenumber, problem, doctor, date, time){
     if (typeof firstname !== 'string'|| typeof lastname !== 'string' || typeof dateofbirth !== 'date' || typeof gender !== 'string' || typeof email !== 'email' || typeof phonenumber !== 'number'
     || typeof problem !== 'string'|| typeof doctor !== 'string'|| typeof date !== 'date'|| typeof time !== 'string')
     {
@@ -231,4 +231,27 @@ async  appointmentconf(firstname, lastname, dateofbirth,gender, email, phonenumb
             let ptn = "^[a-zA-Z0-9]*$"
             if (username.match(ptn) === null) {
                 throw 'username should contain only alphanumeric characters';
-            }
+                const appointmentCollection= await appointments();
+                let newUser={
+                    firstname : firstname,
+                    lastname:lastname,
+                    dateofbirth:dateofbirth,
+                    gender:gender,
+                    email:email,
+                    phonenumber:phonenumber,
+                    problem:problem,
+                    date:date,
+                    time:time
+                }
+                    // let appointmentdata=await appointmentCollection.findOne({_id: });
+                    // if(present !== null)
+                    //     throw "This username is already present"
+
+                    let insertInfo= await appointmentCollection.insertOne(newUser);
+                    let aid = insertInfo.insertedId
+                    console.log(insertInfo);
+                    let appointmentdata=await appointmentCollection.findOne({_id: aid });
+                        // throw"User is not created"
+                    return appointmentdata;
+                }
+        

@@ -1,11 +1,3 @@
-/*! jQuery UI - v1.10.4 - 2014-01-17
-* http://jqueryui.com
-* Includes: jquery.ui.core.css, jquery.ui.accordion.css, jquery.ui.autocomplete.css, jquery.ui.button.css, jquery.ui.datepicker.css, jquery.ui.dialog.css, jquery.ui.menu.css, jquery.ui.progressbar.css, jquery.ui.resizable.css, jquery.ui.selectable.css, jquery.ui.slider.css, jquery.ui.spinner.css, jquery.ui.tabs.css, jquery.ui.tooltip.css, jquery.ui.theme.css
-* To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Verdana%2CArial%2Csans-serif&fwDefault=normal&fsDefault=1.1em&cornerRadius=4px&bgColorHeader=cccccc&bgTextureHeader=highlight_soft&bgImgOpacityHeader=75&borderColorHeader=aaaaaa&fcHeader=222222&iconColorHeader=222222&bgColorContent=ffffff&bgTextureContent=flat&bgImgOpacityContent=75&borderColorContent=aaaaaa&fcContent=222222&iconColorContent=222222&bgColorDefault=e6e6e6&bgTextureDefault=glass&bgImgOpacityDefault=75&borderColorDefault=d3d3d3&fcDefault=555555&iconColorDefault=888888&bgColorHover=dadada&bgTextureHover=glass&bgImgOpacityHover=75&borderColorHover=999999&fcHover=212121&iconColorHover=454545&bgColorActive=ffffff&bgTextureActive=glass&bgImgOpacityActive=65&borderColorActive=aaaaaa&fcActive=212121&iconColorActive=454545&bgColorHighlight=fbf9ee&bgTextureHighlight=glass&bgImgOpacityHighlight=55&borderColorHighlight=fcefa1&fcHighlight=363636&iconColorHighlight=2e83ff&bgColorError=fef1ec&bgTextureError=glass&bgImgOpacityError=95&borderColorError=cd0a0a&fcError=cd0a0a&iconColorError=cd0a0a&bgColorOverlay=aaaaaa&bgTextureOverlay=flat&bgImgOpacityOverlay=0&opacityOverlay=30&bgColorShadow=aaaaaa&bgTextureShadow=flat&bgImgOpacityShadow=0&opacityShadow=30&thicknessShadow=8px&offsetTopShadow=-8px&offsetLeftShadow=-8px&cornerRadiusShadow=8px
-* Copyright 2014 jQuery Foundation and other contributors; Licensed MIT */
-
-/* Layout helpers
-----------------------------------*/
 .ui-helper-hidden {
 	display: none;
 }
@@ -55,18 +47,10 @@
 	z-index: 100;
 }
 
-
-/* Interaction Cues
-----------------------------------*/
 .ui-state-disabled {
 	cursor: default !important;
 }
 
-
-/* Icons
-----------------------------------*/
-
-/* states and images */
 .ui-icon {
 	display: block;
 	text-indent: -99999px;
@@ -74,11 +58,6 @@
 	background-repeat: no-repeat;
 }
 
-
-/* Misc visuals
-----------------------------------*/
-
-/* Overlays */
 .ui-widget-overlay {
 	position: fixed;
 	top: 0;
@@ -129,7 +108,7 @@
 	cursor: pointer;
 	vertical-align: middle;
 	text-align: center;
-	overflow: visible; /* removes extra width in IE */
+	overflow: visible; 
 }
 .ui-button,
 .ui-button:link,
@@ -138,11 +117,9 @@
 .ui-button:active {
 	text-decoration: none;
 }
-/* to make room for the icon, a width needs to be set here */
 .ui-button-icon-only {
 	width: 2.2em;
 }
-/* button elements seem to need a little more width */
 button.ui-button-icon-only {
 	width: 2.4em;
 }
@@ -153,7 +130,6 @@ button.ui-button-icons-only {
 	width: 3.7em;
 }
 
-/* button text element */
 .ui-button .ui-button-text {
 	display: block;
 	line-height: normal;
@@ -178,12 +154,10 @@ button.ui-button-icons-only {
 	padding-left: 2.1em;
 	padding-right: 2.1em;
 }
-/* no icon support for input elements, provide padding by default */
 input.ui-button {
 	padding: .4em 1em;
 }
 
-/* button icon element(s) */
 .ui-button-icon-only .ui-icon,
 .ui-button-text-icon-primary .ui-icon,
 .ui-button-text-icon-secondary .ui-icon,
@@ -208,7 +182,6 @@ input.ui-button {
 	right: .5em;
 }
 
-/* button sets */
 .ui-buttonset {
 	margin-right: 7px;
 }
@@ -216,9 +189,6 @@ input.ui-button {
 	margin-left: 0;
 	margin-right: -.3em;
 }
-
-/* workarounds */
-/* reset extra padding in Firefox, see h5bp.com/l */
 input.ui-button::-moz-focus-inner,
 button.ui-button::-moz-focus-inner {
 	border: 0;
@@ -321,7 +291,6 @@ button.ui-button::-moz-focus-inner {
 	float: left;
 }
 
-/* with multiple calendars */
 .ui-datepicker.ui-datepicker-multi {
 	width: auto;
 }
@@ -464,7 +433,7 @@ button.ui-button::-moz-focus-inner {
 	margin: 0;
 	padding: 0;
 	width: 100%;
-	/* support: IE10, see #8844 */
+
 	list-style-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
 }
 .ui-menu .ui-menu-divider {
@@ -479,7 +448,7 @@ button.ui-button::-moz-focus-inner {
 	display: block;
 	padding: 2px .4em;
 	line-height: 1.5;
-	min-height: 0; /* support: IE7 */
+	min-height: 0; 
 	font-weight: normal;
 }
 .ui-menu .ui-menu-item a.ui-state-focus,
@@ -497,7 +466,6 @@ button.ui-button::-moz-focus-inner {
 	cursor: default;
 }
 
-/* icon support */
 .ui-menu-icons {
 	position: relative;
 }
@@ -506,14 +474,12 @@ button.ui-button::-moz-focus-inner {
 	padding-left: 2em;
 }
 
-/* left-aligned */
 .ui-menu .ui-icon {
 	position: absolute;
 	top: .2em;
 	left: .2em;
 }
 
-/* right-aligned */
 .ui-menu .ui-menu-icon {
 	position: static;
 	float: right;
@@ -629,7 +595,6 @@ button.ui-button::-moz-focus-inner {
 	background-position: 0 0;
 }
 
-/* For IE8 - See #6727 */
 .ui-slider.ui-state-disabled .ui-slider-handle,
 .ui-slider.ui-state-disabled .ui-slider-range {
 	filter: inherit;
@@ -702,13 +667,11 @@ button.ui-button::-moz-focus-inner {
 	overflow: hidden;
 	right: 0;
 }
-/* more specificity required here to override default borders */
 .ui-spinner a.ui-spinner-button {
 	border-top: none;
 	border-bottom: none;
 	border-right: none;
 }
-/* vertically center icon */
 .ui-spinner .ui-icon {
 	position: absolute;
 	margin-top: -8px;
@@ -722,9 +685,7 @@ button.ui-button::-moz-focus-inner {
 	bottom: 0;
 }
 
-/* TR overrides */
 .ui-spinner .ui-icon-triangle-1-s {
-	/* need to fix icons sprite */
 	background-position: -65px -16px;
 }
 .ui-tabs {
@@ -779,9 +740,6 @@ button.ui-button::-moz-focus-inner {
 body .ui-tooltip {
 	border-width: 2px;
 }
-
-/* Component containers
-----------------------------------*/
 .ui-widget {
 	font-family: Verdana,Arial,sans-serif;
 	font-size: 1.1em;
@@ -814,8 +772,6 @@ body .ui-tooltip {
 	color: #222222;
 }
 
-/* Interaction states
-----------------------------------*/
 .ui-state-default,
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
@@ -867,8 +823,6 @@ body .ui-tooltip {
 	text-decoration: none;
 }
 
-/* Interaction Cues
-----------------------------------*/
 .ui-state-highlight,
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
@@ -920,11 +874,6 @@ body .ui-tooltip {
 .ui-state-disabled .ui-icon {
 	filter:Alpha(Opacity=35); /* For IE8 - See #6059 */
 }
-
-/* Icons
-----------------------------------*/
-
-/* states and images */
 .ui-icon {
 	width: 16px;
 	height: 16px;
@@ -953,8 +902,6 @@ body .ui-tooltip {
 .ui-state-error-text .ui-icon {
 	background-image: url(images/ui-icons_cd0a0a_256x240.png);
 }
-
-/* positioning */
 .ui-icon-blank { background-position: 16px 16px; }
 .ui-icon-carat-1-n { background-position: 0 0; }
 .ui-icon-carat-1-ne { background-position: -16px 0; }
@@ -1131,12 +1078,6 @@ body .ui-tooltip {
 .ui-icon-grip-solid-horizontal { background-position: -48px -224px; }
 .ui-icon-gripsmall-diagonal-se { background-position: -64px -224px; }
 .ui-icon-grip-diagonal-se { background-position: -80px -224px; }
-
-
-/* Misc visuals
-----------------------------------*/
-
-/* Corner radius */
 .ui-corner-all,
 .ui-corner-top,
 .ui-corner-left,
@@ -1161,8 +1102,6 @@ body .ui-tooltip {
 .ui-corner-br {
 	border-bottom-right-radius: 4px;
 }
-
-/* Overlays */
 .ui-widget-overlay {
 	background: #aaaaaa url(images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x;
 	opacity: .3;
@@ -1183,11 +1122,6 @@ body .ui-tooltip {
     box-sizing: border-box;
     margin-bottom: 10px;
 }
-/* 
-input[type=text]:invalid {
-    border: red solid 1px;
-} */
-
 .container {
     width: 50%;
     display: flex;
@@ -1198,12 +1132,7 @@ input[type=text]:invalid {
    text-align: center;
 }
 #comment{
-	
 	margin: 100;
-
-
-
- 
     background-color: rgb(250, 250, 250);
 }
 #addComments {
@@ -1213,7 +1142,6 @@ input[type=text]:invalid {
     color: white;
     align-self: center;
 }
-
 .wrapper > button {
     margin-right: 5px;
     padding: 5px;

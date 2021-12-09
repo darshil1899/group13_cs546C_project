@@ -1,0 +1,34 @@
+<article class="sign-up">
+    <header>
+        <h1 class="Signup-heading">
+            Edit Profile
+        </h1>
+    </header>
+    <form action="/edit/{{userId._id}}" method="POST" id="edit-form">
+        {{!-- <label class="user-text" for="edit-form">
+            user Name:
+        </label> --}}
+        {{!-- <input name="username" id="username" type="text" value=" {{userId.userName}}"> --}}
+        <br>
+        {{!-- <label class="user-text" for="username">
+            User Name
+        </label>
+        <input name = "username" id = "username" type = "text" value = "{{userId.username}}"> --}}
+        <br>
+        <label class="user-text" for = "firstname">
+        First Name:
+        </label>
+        <input name="firstname" id="firstname" type="text">
+        <label class = "password-text" for ="lastname">
+        Last Name
+        </label>
+        <input name="lastname" id="lastname" type="text" >
+        <br> <label>Gender</label>
+          <select id="gender" name="gender">
+            <option value="none" selected>Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">other</option>
+          </select>
+            {{!-- <input name="Address" id="Address" type="text" value="{{userId.gender}}" ) <br> --}}
+            <label class = "password-text" for ="email">

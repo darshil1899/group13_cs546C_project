@@ -1,57 +1,84 @@
 <article class="sign-up">
-    <header>
-        <h1 class="Signup-heading">
-            Edit Profile
-        </h1>
-    </header>
-    <form action="/edit/{{userId._id}}" method="POST" id="edit-form">
-        {{!-- <label class="user-text" for="edit-form">
+  <header>
+    <h1 class="Signup-heading">
+      Edit Profile
+    </h1>
+  </header>
+  <form action="/edit/{{userId._id}}" method="POST" id="edit-form">
+    {{! <label class="user-text" for="edit-form">
             user Name:
-        </label> --}}
-        {{!-- <input name="username" id="username" type="text" value=" {{userId.userName}}"> --}}
-        <br>
-        {{!-- <label class="user-text" for="username">
+        </label> }}
+    {{!-- <input name="username" id="username" type="text" value=" {{userId.userName}}"> --}}
+    <br />
+    {{!-- <label class="user-text" for="username">
             User Name
         </label>
         <input name = "username" id = "username" type = "text" value = "{{userId.username}}"> --}}
-        <br>
-        <label class="user-text" for = "firstname">
-        First Name:
-        </label>
-        <input name="firstname" id="firstname" type="text">
-        <label class = "password-text" for ="lastname">
-        Last Name
-        </label>
-        <input name="lastname" id="lastname" type="text" >
-        <br> <label>Gender</label>
-          <select id="gender" name="gender">
-            <option value="none" selected>Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">other</option>
-          </select>
-            {{!-- <input name="Address" id="Address" type="text" value="{{userId.gender}}" ) <br> --}}
-            <label class = "password-text" for ="email">
-     Email
-            </label>
-            <input name="email" id="email" type="email" value="{{userId.email}}">
-            <br>
-            <label class="password-text" for ="city">
+    <br />
+    <label class="user-text" for="firstname">
+      First Name:
+    </label>
+    <input
+      name="firstname"
+      id="firstname_1"
+      type="text"
+      value="{{userId.firstname}}"
+    />
+    <p id="f_error"></p>
+    <label class="password-text" for="lastname">
+      Last Name
+    </label>
+    <input
+      name="lastname"
+      id="lastname_1"
+      type="text"
+      value="{{userId.lastname}}"
+    />
+    <p id="l_error"></p>
+    <br />
+    <label>Gender</label>
+    <select id="gender_1" name="gender">
+      <option value="none" selected>Gender</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">other</option>
+    </select>
+    <p id="gender_error"></p>
+    {{!-- <input name="Address" id="Address" type="text" value="{{userId.gender}}" ) <br> --}}
+    <label class="password-text" for="email">
+
+      Email
+    </label>
+    <input name="email" id="email_1" type="email" value="{{userId.email}}" />
+    <p id="mail_error"></p>
+    <br />
+    {{!-- <label class="password-text" for ="city">
                city
             </label>
-            <input name="city" id="city" type="text" value "{{userId.city}}">
-            <br>
-            <label class = "password-text" for="phonenumber">
-            Phone number
-            </label>
-            <input name="phonenumber" id="phonenumber" type="number" value="{{userId.phonenumber}}">
-            <br>
-            <input name = "_method" type="hidden" value = "PUT">
-            <input class ="submit-button" type ="submit" value = "Done">
-            </form>
-            {{#if error}}
-            <div class="error"></div>
-                {{/if}}
-                <p id="success-edit" hidden>Account updated successfully</p>
-                <p id="user-error" hidden>Either the username or password is incorrect</p>
+            <input name="city" id="city" type="text" value "{{userId.city}}"> --}}
+    <br />
+    <label class="password-text" for="phonenumber">
+      Phone number
+    </label>
+    <input
+      name="phonenumber"
+      id="phonenumber_1"
+      type="number"
+      value="{{userId.phonenumber}}"
+    />
+    <p id="contact_error"></p>
+    <br />
+    <input name="_method" type="hidden" value="PUT" />
+    <input
+      id="submit_button"
+      class="submit-button"
+      type="submit"
+      value="Done"
+    />
+  </form>
+  {{#if error}}
+    <div class="error"></div>
+  {{/if}}
+  <p id="success-edit" hidden>Account updated successfully</p>
+  <p id="user-error" hidden>Either the username or password is incorrect</p>
 </article>

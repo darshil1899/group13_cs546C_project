@@ -1,0 +1,110 @@
+<article class="signup1">
+  <h1>Sign up</h1>
+  <form action="/users/signup1" method="POST">
+    <label>First Name</label>
+    <input
+      type="text"
+      id="firstname"
+      name="firstname"
+      placeholder="first name"
+      required
+    /><p id="firstname_error"></p>
+    <label>Last Name</label>
+    <input
+      type="text"
+      id="lastname"
+      name="lastname"
+      placeholder="last name"
+      required
+    /><p id="lastname_error"></p>
+    <label>User Name</label>
+    <input
+      type="text"
+      id="username"
+      name="username"
+      placeholder="user name"
+      required
+    /><p id="username_error"></p>
+    <label for="start">Date of Birth</label>
+
+    <input
+      type="date"
+      id="start"
+      name="dateofbirth"
+      value="none"
+      min="1905-01-01"
+      max="2021-12-10"
+    /><p id="date_error"></p>
+    <label>Gender</label>
+    <select id="gender" name="gender">
+      <option value="none" selected>Gender</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">other</option>
+    </select>
+    <label>Email</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      placeholder="Email"
+      required
+    /><br /><p id="email_error"></p>
+    <label>Phone Number</label>
+    <input
+      type="text"
+      id="phonenumber"
+      name="phonenumber"
+      placeholder="Phone Number"
+      required
+    /><br /><br /><p id="phonenumber_error"></p>
+    <label for="password"> Password: </label>
+    <input
+      id="password"
+      name="password"
+      type="password"
+      placeholder="Password"
+      required
+    /><p id="password_error"></p>
+    <br /><br />
+    <input type="submit" value="Sign up" />
+
+  </form>
+  {{#if error}}
+    <p>{{error}}</p>
+  {{/if}}
+  <p class="font">
+    Already have an account?
+    <br />Click here to login
+    <h3><a href="/users/login">Login</a></h3></p>
+  <p id="success-signup1" hidden>Account created successfully</p>
+  <p id="suser-error hidden>" Either the username or password is incorrect></p>
+</article><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

@@ -6,11 +6,9 @@ html {
   overflow-y: scroll;
   }
 body {
-  background: linear-gradient(0.25turn, #d48fd4, #ebf8e1,#88c2db); 
-}
-.payment
-{
-  background: linear-gradient(0.25turn, #d48fd4, #ebf8e1,#88c2db); 
+  background: linear-gradient(0.25turn, #d48fd4, #ebf8e1,#88c2db);
+  
+  
 }
 
 header {
@@ -22,7 +20,6 @@ header {
 }
 
 .footer {
-  color: #121212;
   position: relative;
   width: 180%;
   left:auto;
@@ -31,7 +28,6 @@ header {
 }
 
 .footer .col {
-  color: #121212;
   position: relative;
   border-top: 1px solid;
   
@@ -114,11 +110,9 @@ p {
   font-size: 15px;
 }
 .font{
-  color: #88c2db;
   font-size: 18px;
   padding-top: -10%;
 }
-
 
 .footerp
 {
@@ -164,67 +158,22 @@ p {
   .book{
     position : center;
   }
-  h2 {
-    
-    text-align: center;
-  
-  }
-  .logout{
-    color: #49c1a2;
-  }
-  h3 {
-    
-    text-align: center;
 
-  }
-  .app{
-    color: #49c1a2;
-  }
+  
   h1 {
-    
     text-align: center;
     padding-top: 0px;
     margin-top: 0px;
   }
-  .about{
-    background-color: linear-gradient(0.25turn, #d48fd4, #ebf8e1,#88c2db);
-    color: #636e45;
-  }
-  .app{
-    color: #49c1a2;
-  }
-  .set{
-    color: #036608;
-  }
- 
-  h2 {
-    text-align: center;
-  }
- .make{
-    color: #4dcfa8;
-  }
+  
   h4 {
     text-align: center;
-  }
-  .about{
-    background-color: linear-gradient(0.25turn, #d48fd4, #ebf8e1,#88c2db);
-    color: #636e45;
-  }
-  .pay{
-    text-align: center;
-    color: #a52c2c;
   }
   h5{
     margin-top: 0px;
     font-size: 18px;
   }
- li{
-   text-align: center;
- }
- .pay{
-  color: #a52c2c;
- }
-    
+  
   form {
     width: 300px;
     margin-left: 20px;
@@ -281,9 +230,6 @@ p {
     text-align: center;
     padding-top: 20px;
     font-size: 15px;
-  }
-  .error{
-    color:#a52c2c;
   }
   .para-2 {
     text-align: center;
@@ -342,29 +288,4 @@ div{
     outline: none;
 }
 
-
-body.dark-theme {
-  --text-color: #eee;
-  --bkg-color: #121212;
-}
-
-@media (prefers-color-scheme: dark) {
-  /* defaults to dark theme */
-  body {
-    --text-color: #eee;
-    --bkg-color: #121212;
-  }
-  body.light-theme {
-    --text-color: #222;
-    --bkg-color: linear-gradient(0.25turn, #d48fd4, #ebf8e1,#88c2db);
-}
-
-* {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-body {
-  background: var(--bkg-color);  
-}
-
-}
+  

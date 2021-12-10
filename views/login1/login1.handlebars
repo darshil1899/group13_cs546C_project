@@ -1,0 +1,36 @@
+<article class="login">
+    <h1> Login </h1>
+    <form action="/users/login1" method="POST">
+        
+            <label> Username: </label>
+            <input id="username" type="text" name="username" placeholder="Enter your username">        
+            <p id="username_error"></p>
+        {{!-- <br><br> --}}
+        
+            <label> Password: </label>
+            <input id="password" type="password" name="password" placeholder="Enter your password">
+            <p id="password_error"></p>
+        <input id="btnsubmit" type="submit" value="LogIn">
+    </form>
+    {{#if error}}
+    
+   {{error}}</p>
+           {{/if}}
+            <p class="font">
+        Need to register? <br>Click here to signup
+    <h3><a href="/users/signup1">Sign Up</a></h3>
+    </p>
+</article>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

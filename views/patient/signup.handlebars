@@ -1,0 +1,15 @@
+<form id="signup-form" method="POST" action="/doctorsusers/signup">
+  <label>Username</label>
+  <input id="username" name="username" />
+  <label>Password</label>
+  <input id="password" type="password" name="password" />
+  <div>
+    {{#if hasErrors}}
+      <p class="error"> {{errors}}.</p>
+    {{/if}}
+  </div>
+  <label>
+    <input type="submit" value="Submit" />
+  </label>
+  <p class="bottom"><a href="/">"Already have an account? Click here to log-in"</a></p>
+</form>

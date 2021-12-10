@@ -38,7 +38,7 @@ var password1 = password.value
      {
         error2.innerHTML= 'password has less characters';
         error1.hidden=true
-        error1.hidden=false
+        error2.hidden=false
         event.preventDefault();
      }
     //  if (/\s/.test(username))
@@ -59,4 +59,5 @@ var password1 = password.value
          error2.hidden =true
          event.preventDefault();
      }
+ 
 }

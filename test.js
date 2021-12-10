@@ -10,34 +10,40 @@ async function main() {
   let secon;
   try {
     const darshil = await restaurants.create(
-      "arshil",
+      "Darshil",
       "Shah",
       "08/01/1999",
       "Male",
-      "123456",
+      "123454343645",
       "Dss",
-      3
+      "397"
     );
     abcd = darshil;
-    // console.log(abcd._id);
     console.log(abcd);
   } catch (e) {
     console.log(e);
   }
 
-  try {
-    const doclogin = await doclo.create("dsss", "123456");
-    console.log(doclogin);
-  } catch (e) {
-    console.log(e);
-  }
+  // try {
+  //   const doclogin = await doclo.create("dsss", "123456");
+  //   console.log(doclogin);
+  // } catch (e) {
+  //   console.log(e);
+  // }
 
-  try {
-    const dise = await disea.create(abcd._id.toString(), "Cancer", 33);
-    console.log(dise);
-  } catch (e) {
-    console.log(e);
-  }
+  // try {
+  //   const dise = await disea.create("61a51d4b800d6e723600b5c8", "Cancer", 33);
+  //   console.log(dise);
+  // } catch (e) {
+  //   console.log(e);
+  // }
+
+  // try {
+  //   const dise = await disea.create("61a51d4b800d6e723600b5c8", "Fever", 33);
+  //   console.log(dise);
+  // } catch (e) {
+  //   console.log(e);
+  // }
 }
 
 main();

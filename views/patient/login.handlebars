@@ -1,0 +1,19 @@
+<h1>
+  Hello, Please Enter valid username and password to login!
+</h1>
+<form id="login-form" method="POST" action="/doctorsusers/login">
+  <label>Username</label>
+  <input id="username" name="username" />
+  <label>Password</label>
+  <input id="password" type="password" name="password" />
+  <div>
+    {{#if hasErrors}}
+      <p class="error"> {{errors}}.</p>
+    {{/if}}
+  </div>
+  <label>
+    <input type="submit" value="Submit" />
+  </label>
+  <p class="bottom"><a href="/doctorsusers/signup">Need to register? Click here
+      to sign-up</a></p>
+</form>

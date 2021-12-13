@@ -1,0 +1,38 @@
+<script>
+        const btn = document.querySelector(".btn-toggle"); const
+        prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+        const currentTheme = localStorage.getItem("theme"); if (currentTheme ==
+        "dark") { document.body.classList.toggle("dark-theme"); } else if
+        (currentTheme == "light") {
+        document.body.classList.toggle("light-theme"); }
+        btn.addEventListener("click", function () { if
+        (prefersDarkScheme.matches) {
+        document.body.classList.toggle("light-theme"); var theme =
+        document.body.classList.contains("light-theme") ? "light" : "dark"; }
+        else { document.body.classList.toggle("dark-theme"); var theme =
+        document.body.classList.contains("dark-theme") ? "dark" : "light"; }
+        localStorage.setItem("theme", theme); });
+      </script>
+
+      <button class="btn-toggle">Switch Theme</button>
+
+      body.dark-theme {
+  --text-color: #eee;
+  --bkg-color: #121212;
+}
+@media (prefers-color-scheme: dark) {
+  /* defaults to dark theme */
+  body {
+    --text-color: #eee;
+    --bkg-color: #121212;
+  }
+  body.light-theme {
+    --text-color: #222;
+    --bkg-color: linear-gradient(0.25turn, #d48fd4, #ebf8e1, #88c2db);
+  }
+  * {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  body {
+    background: var(--bkg-color);
+  }

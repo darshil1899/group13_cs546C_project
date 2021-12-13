@@ -1,0 +1,25 @@
+ <button onclick="parent.location='/doctorsusers/private'">Back to Register page</button><br>
+<button onclick="parent.location='/doctorsusers/logout'">Logout</button>
+<br>
+
+{{#each allAppointments}}
+  <h1>{{this.firstname}} {{this.lastname}}</h1>
+  <p>{{this.date}} -- {{this.time}}</p>
+  <ul>
+    {{#each this.comments}}
+      {{#if this.byDoctor}}
+        <li>Doctor commented: {{this.comment}}</li>
+      {{/if}}
+      {{#unless this.byDoctor}}
+        <li>Patient commented: {{this.comment}}</li>
+      {{/unless}}
+    {{/each}}
+  </ul>
+  <form action="/doctorsusers/{{this._id}}/add_doctors_comment" method="post">
+  <label for="comment"></label>
+    <input type="text" name="comment" id="comment" />
+    <input type="submit" />
+  </form>
+{{/each}}
+<br>
+<br>

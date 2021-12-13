@@ -7,8 +7,8 @@ async function create(patientID, diseases_name, score) {
     throw "Patient id is not defined";
 
   if (!diseases_name || !score) throw "Please provide all inputs";
-  if (diseases_name.trim() == "" || score.trim() == "")
-    throw "Do not enter blank values";
+  // if (diseases_name.trim() == "" || score.trim() == "")
+  //   throw "Do not enter blank values";
 
   // let regexp = /\s/g;
   // if (!diseases_name.match(regexp) || !score.match(regexp))

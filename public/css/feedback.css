@@ -5,7 +5,12 @@ html {
   *, *:before, *:after {
     box-sizing: inherit;
   }
-  
+  h3{
+    color: rgb(5, 158, 158);
+  }
+  h4{
+    color: rgb(5, 158, 158);
+  }
   .column {
     float: left;
     width: 33.3%;
@@ -21,13 +26,15 @@ html {
   }
   
   .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 2.0);
   }
   
   .container {
     padding: 0 16px;
   }
-  
+  h2[id= "know"]{
+    color:  rgb(5, 158, 158);
+  }
   .container::after, .row::after {
     content: "";
     clear: both;
@@ -35,7 +42,7 @@ html {
   }
   
   .title {
-    color: grey;
+    color: rgb(146, 144, 144);
     font-size: 110%;
   }
   
@@ -45,12 +52,15 @@ html {
     display: inline-block;
     padding: 8px;
     color: white;
-    background-color: #000;
+    background-color: rgb(39, 134, 26);
     text-align: center;
     cursor: pointer;
     width: 100%;
   }
   
   .button:hover {
-    background-color: #555;
+    background-color: rgb(39, 134, 26);
+  }
+  p {
+    color: rgb(121, 129, 3);
   }

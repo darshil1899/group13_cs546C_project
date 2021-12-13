@@ -1,24 +1,25 @@
-<h1> your appointment is confirmed</h1>
-<center>
-<p>
-    <h3>{{appointment.date}} --- {{appointment.time}}</h3>
-</p>
-</center>
+<article class="appoint">
+<h1 class="view"> your appointment is confirmed</h1>
 
-        
-            
+<p class="view3">
+    <h2 class="view">{{appointment.date}} --- {{appointment.time}}</h2>
+
+
                 <form>
-                 <center><input type=button onClick="parent.location='https://www.paypal.com/signin?returnUri=https%3A%2F%2Fwww.paypal.com%2Fcgi-bin%2Fwebscr%3fcmd%3d_account'" value='Make Payment online' target="_blank"></form></center>
-                 <br>
+                    <h2 class="make"><u>Make Payment</u>:</h2>
+                        <a id="logout" href="https://www.paypal.com/signin?returnUri=https%3A%2F%2Fwww.paypal.com%2Fcgi-bin%2Fwebscr%3fcmd%3d_account" target="_blank">Online Payment</a><br><br>
+                        <a id="logout" href="/public/css/offline.html" target="_blank">Offline Payment</a><br>
                   <a href="/users/patient1">
         <h3>
-            <center>HOME</center>
+            HOME 
         </h3>
     </a>
+   
              <br>
               <br>
               <br>
-                </form>   
+                </form>
+                </article>
                
 
 

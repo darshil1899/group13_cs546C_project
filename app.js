@@ -49,6 +49,37 @@ app.use("/private", (req, res, next) => {
   }
 });
 
+// app.use("/users", (req, res, next) => {
+//   if (req.session.user) {
+//     return res.redirect("/users/patient1");
+//   } else {
+//     next();
+//   }
+// });
+
+// app.use("/users/book", (req, res, next) => {
+//   if (!req.session.user) {
+//     return res.redirect("/users/");
+//   } else {
+//     next();
+//   }
+// });
+
+// app.use("/users", async (req, res) => {
+//   if (req.session.username) res.redirect("/private");
+//   return;
+// });
+
+// app.use("/doctorsusers", async (req, res) => {
+//   if (req.session.username) res.redirect("/private");
+//   return;
+// });
+
+app.use("/users/edit/:id", async (req, res, next) => {
+  if (req.body._method === "PUT") req.method = "PUT";
+  next();
+});
+
 let logMiddleware = function (req, res, next) {
   let CurrenttimeStamp = new Date().toUTCString();
 
@@ -80,7 +111,7 @@ let logMiddleware = function (req, res, next) {
   next();
 };
 
-//app.use(logMiddleware);
+app.use(logMiddleware);
 configRoutes(app);
 
 app.listen(3000, () => {

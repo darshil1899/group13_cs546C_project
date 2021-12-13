@@ -116,7 +116,7 @@ async function get(id) {
   Patient._id = Patient._id.toString();
 
   if (Patient.diseases.length > 0) {
-    for (let i in Patient.diseases) {
+    for (let i = 0; i < Patient.diseases.length; i++) {
       Patient.diseases[i]._id = Patient.diseases[i]._id.toString();
     }
   }
@@ -134,7 +134,7 @@ async function bookRoom(id) {
   let dar = await PatientCollection.findOne({
     _id: new ObjectId(id),
   });
-  console.log(dar);
+
   const Patient = await PatientCollection.updateOne(
     { _id: new ObjectId(id) },
     { $set: { roomBooked: !dar.roomBooked } }
@@ -210,11 +210,20 @@ async function deletepat(id) {
 //   }
 //}
 
+const searchDoctors = async (searchTerm) => {
+  const doctorCollection = await collections.doctors();
+
+  return await doctorCollection
+    .find({ username: { $regex: searchTerm } })
+    .toArray();
+};
+
 module.exports = {
   create,
   get,
   getAllPatients,
   bookRoom,
   deletepat,
+  searchDoctors,
   // remove,
 };

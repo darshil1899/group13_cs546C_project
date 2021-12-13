@@ -1,13 +1,15 @@
 const { ObjectId } = require("bson");
 const express = require("express");
 const { users } = require("../config/mongoCollections");
+const doctors = require("../data/doctors");
 const router = express.Router();
 const data = require("../data/users");
+var xss = require("xss");
 
 router.get("/", async (req, res) => {
   let reqSes = Object.keys(req.session);
   if (reqSes.includes("username")) {
-    res.redirect("/patient1");
+    res.redirect("/users/patient1");
     return;
   } else {
     res.render("login1/login1");
@@ -15,20 +17,59 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/search_doctors", async (req, res) => {
+  res.render("search/search_doc");
+  return;
+});
+
+router.post("/search_doctors", async (req, res) => {
+  let searchTerm = req.body.searchterm;
+  const searchResults = await doctors.searchDoctors(searchTerm);
+  res.status(200).render("search/search_results", { searchResults });
+  return;
+});
+
+router.post("/:id/add_patients_comment", async (req, res) => {
+  try {
+    req.params.id = xss(req.params.id);
+    let appointmentId = req.params.id;
+    const addAppComment = await data.addAppointmentComment(
+      appointmentId,
+      xss(req.body.comment),
+      "patient"
+    );
+    if (addAppComment) {
+      res.redirect("/users/view_my_appointments");
+      return;
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(400).render("appointment/all_my_appointments", {
+      error: "Something went wrong.",
+    });
+    return;
+  }
+});
+
 router.post("/login1", async (req, res) => {
   try {
-    if (!req.body.username || !req.body.password) {
+    if (xss(!req.body.username) || xss(!req.body.password)) {
       res.status(400).render("login1/login1", {
         error: "Username or Password is not provided ",
       });
       return;
     }
-    const User = await data.checkUser(req.body.username, req.body.password);
-    // console.log(User);
+    const User = await data.checkUser(
+      xss(req.body.username),
+      xss(req.body.password)
+    );
+
     if (User.authenticated) {
       // { authenticated: true, authenticatedUser: user }
       req.session.username = req.body.username.toLowerCase();
       req.session.userId = User.loggedinuser._id;
+      req.session.useremail = User.loggedinuser.email;
+      req.session.isDoctor = false;
       // req.session.userId = User.authenticatedUser._id.toString();
       res.redirect("/users/patient1");
       return;
@@ -45,14 +86,14 @@ router.post("/login1", async (req, res) => {
 router.post("/signup1", async (req, res) => {
   try {
     const User = await data.createUser(
-      req.body.username,
-      req.body.password,
-      req.body.firstname,
-      req.body.lastname,
-      req.body.dateofbirth,
-      req.body.phonenumber,
-      req.body.email,
-      req.body.gender
+      xss(req.body.username),
+      xss(req.body.password),
+      xss(req.body.firstname),
+      xss(req.body.lastname),
+      xss(req.body.dateofbirth),
+      xss(req.body.phonenumber),
+      xss(req.body.email),
+      xss(req.body.gender)
     );
     if (User.userInserted) {
       res.redirect("/users");
@@ -89,19 +130,22 @@ router.get("/logout1", async (req, res) => {
 router.post("/book", async (req, res) => {
   try {
     if (
-      !req.body.firstname ||
-      !req.body.lastname ||
-      !req.body.phonenumber ||
-      !req.body.email
+      xss(!req.body.firstname) ||
+      xss(!req.body.lastname) ||
+      xss(!req.body.phonenumber) ||
+      xss(!req.body.email)
     ) {
       res
         .status(400)
         .render("book/book", { error: "Values are not provided " });
       return;
     }
-    const User = await data.checkUser(req.body.username, req.body.password);
-    console.log(User);
-    req.session.username = req.body.username.toLowerCase();
+    const User = await data.checkUser(
+      xss(req.body.username),
+      xss(req.body.password)
+    );
+
+    req.session.username = xss(req.body.username.toLowerCase());
     if (User.authenticated) {
       res.redirect("/patient1");
       return;
@@ -151,7 +195,7 @@ router.post("/feedback", async (req, res) => {
   }
 });
 
-router.post("/users/appointment", async (req, res) => {
+router.post("/appointment", async (req, res) => {
   try {
     if (!req.body.firstname || !req.body.lastname) {
       res.status(400).render("book/book", {
@@ -159,17 +203,27 @@ router.post("/users/appointment", async (req, res) => {
       });
       return;
     }
+    console.log(
+      xss(req.body.firstname),
+      xss(req.body.lastname),
+      xss(req.body.dateofbirth),
+      xss(req.body.gender),
+      xss(req.body.email),
+      xss(req.body.phonenumber),
+      xss(req.body.doctor),
+      xss(req.body.date),
+      xss(req.body.time)
+    );
     const appointmentvalue = await data.appointmentconf(
-      req.body.firstname,
-      req.body.lastname,
-      req.body.dateofbirth,
-      req.body.gender,
-      req.body.email,
-      req.body.phonenumber,
-      req.body.problem,
-      req.body.doctor,
-      req.body.date,
-      req.body.time
+      xss(req.body.firstname),
+      xss(req.body.lastname),
+      xss(req.body.dateofbirth),
+      xss(req.body.gender),
+      xss(req.session.useremail),
+      xss(req.body.phonenumber),
+      xss(req.body.doctor),
+      xss(req.body.date),
+      xss(req.body.time)
     );
 
     console.log(appointmentvalue);
@@ -280,6 +334,7 @@ router.put("/edit/:id", async (req, res) => {
   // }
 
   try {
+    req.params.id = xss(req.params.id);
     await data.get(req.params.id);
   } catch (e) {
     res.status(500).json({ error: "Internal server error" });
@@ -287,26 +342,35 @@ router.put("/edit/:id", async (req, res) => {
   }
 
   try {
-    console.log(req.body.username);
-    console.log(req.body.password);
+    console.log(xss(req.body.username));
+    console.log(xss(req.body.password));
     const newuser = await data.updateProfile(
       req.params.id,
       new_info.firstname,
       new_info.lastname,
       new_info.gender,
-      new_info.email,
+
       new_info.phonenumber
     );
-    console.log(newuser);
+
     if (newuser.updateInserted) {
-      res.redirect("/profile");
-      console.log("edit//");
+      req.session.useremail = new_info.email;
+      res.redirect("/users/profile");
+
       return;
     }
   } catch (e) {
+    console.log(e);
     res.status(400).render("update/update", { error: e });
     return;
   }
+});
+
+router.get("/view_my_appointments", async (req, res) => {
+  let email = req.session.useremail;
+  const myAppointments = await data.getAppointmentByEmailAddress(email);
+
+  res.render("appointment/all_my_appointments", { myAppointments });
 });
 
 module.exports = router;

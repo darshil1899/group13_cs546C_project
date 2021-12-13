@@ -5,7 +5,7 @@ const collections = require("../config/mongoCollections");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
-async function create(username, password) {
+async function create(username, password, rating = 0) {
   if (!username) throw "Provide username";
   if (!password) throw "provide password";
   if (username.length < 4) throw "the username  at least 4 characters long";
@@ -21,6 +21,7 @@ async function create(username, password) {
   const newUser = {
     username: username,
     password: hash,
+    rating: rating,
   };
   const userCollection = await doctors();
   let allUsers = await userCollection.find({}).toArray();
@@ -51,18 +52,18 @@ async function checkUser(username, password) {
   if (password.match(regexp)) throw "Invalid password";
   let compareTomatch = false;
   const userCollection = await doctors();
-  let allUsers = await userCollection.find({}).toArray();
-  for (let i = 0; i < allUsers.length; i++) {
-    if (allUsers[i].username == username) {
-      compareTomatch = await bcrypt.compare(password, allUsers[i].password);
-    }
-  }
-  try {
-    if (compareTomatch) {
-      return { authenticated: true };
-    }
-  } catch (error) {
-    console.log("Either the username or password is invalid");
+  let user = await userCollection.findOne({ username: username });
+  if (!user) throw `No user found wiht that username.`;
+  compareTomatch = await bcrypt.compare(password, user.password);
+  if (compareTomatch) {
+    return {
+      authenticated: true,
+      loggedinuser: await userCollection.findOne({ username: username }),
+    };
+  } else {
+    return {
+      authenticated: false,
+    };
   }
 }
 module.exports = {

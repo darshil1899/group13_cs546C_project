@@ -11,6 +11,10 @@ const constructorMethod = (app) => {
   app.use("/users", routes);
   app.use("/main", mainRoutes);
   app.use("/$", async (req, res) => {
+    if (req.session.isDoctor) {
+      res.redirect("doctors/view_patients");
+      return;
+    }
     res.redirect("/main");
     return;
   });

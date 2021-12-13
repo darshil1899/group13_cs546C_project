@@ -1,0 +1,18 @@
+{{#each myAppointments}}
+  <h1 class="view3">{{this.firstname}} {{this.lastname}}</h1>
+  <p class="view3">{{this.date}} -- {{this.time}}</p>
+  <ul>
+    {{#each this.comments}}
+      {{#if this.byDoctor}}
+        <li>Doctor commented: {{this.comment}}</li>
+      {{/if}}
+      {{#unless this.byDoctor}}
+       <li>Patient commented: {{this.comment}}</li>
+      {{/unless}}
+    {{/each}}
+  </ul>
+  <form action="/users/{{this._id}}/add_patients_comment" method="post">
+    <input type="text" name="comment" />
+    <input type="submit" />
+  </form>
+{{/each}}

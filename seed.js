@@ -152,6 +152,7 @@ async function main() {
 
 
 
+/--Register patient--//
 
 
 
@@ -286,6 +287,7 @@ async function main() {
 
 
 
+  -----Appointment---//
 
 try {
     const dssa = await dar.createUser(

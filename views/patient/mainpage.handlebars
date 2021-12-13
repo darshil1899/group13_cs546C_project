@@ -1,16 +1,24 @@
-<html>
-  <head>
-    <title>Welcome to the Hopsital. Please login to enjoy our services</title>
-  </head>
 
-  <body>
-      <h1>
+<h1 class="welcome">
   Welcome to the Hopsital. Please login to enjoy our services
 </h1>
+<img
+      src="public/css/home3.jpeg"
+      alt="Hospital"
+      width="1400"
+      height="400"
+
+    >
 
 
-<br></br>
-<button><a href="/doctorsusers/">Doctors</a></button>
+<br><br><p class="bt">
+<input
+          type="button"
+          onClick="parent.location='/doctorsusers/'"
+          value="Doctors Login here" id="click">
 
-<button><a href="/users">Patients</a></button>
-  </body>
+<input
+          type="button"
+          onClick="parent.location='/users'"
+          value="Patients Login here" id="click1"><br><br>
+

@@ -1,17 +1,17 @@
-<button onclick="window.location.href='/doctors/view_patients'">LINK</button>
+<button onclick="window.location.href='/doctors/view_patients'">View All patients</button>
 
-<h1>Patient info for {{patient.firstname}} {{patient.lastname}}</h1>
+<h1 class="view">Patient info for {{patient.firstname}} {{patient.lastname}}</h1>
 
-<p>Date of Birth:{{patient.dateOfBirth}}</p>
-<p>Gender: {{patient.sex}}</p>
-<p>Patient Unique Number: {{patient.hospitalNumber}}</p>
-<p>{{patient.emailid}}</p>
-<p>Room Booked: {{patient.roomBooked}}</p>
-<p>{{patient.disease_name}}</p>
-<p>Total Score: {{patient.totalscore}}</p>
+<p class="view3">Date of Birth:{{patient.dateOfBirth}}</p>
+<p class="view3">Gender: {{patient.sex}}</p>
+<p class="view3">Patient Unique Number: {{patient.hospitalNumber}}</p>
+<p class="view3">{{patient.emailid}}</p>
+<p class="view3">Room Booked: {{patient.roomBooked}}</p>
+<p class="view3">{{patient.disease_name}}</p>
+<p class="view3">Total Score: {{patient.totalscore}}</p>
 
 {{#each patient.diseases}}
-  <p>{{this.disease_name}}: <span>{{this.disease_score}}</span></p>
+  <p class="view3">{{this.disease_name}}: <span>{{this.disease_score}}</span></p>
 {{/each}}
 
 <form method="POST" action="/doctors/delete/{{patient._id}}">

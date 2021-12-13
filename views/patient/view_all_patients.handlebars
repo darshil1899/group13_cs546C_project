@@ -1,0 +1,23 @@
+<h1 class="view">All Patient Info:</h1>
+<button onclick="parent.location='/doctorsusers/logout'">Logout</button>
+ <button onclick="parent.location='/doctorsusers/private'">Back to Register page</button>
+{{#each patients}}
+  <h2 class="view1">Name:
+    <a id ="logout" href="/doctors/view_patient/{{this._id}}">{{this.firstname}}
+      {{this.lastname}}</a></h3>
+  <p class="view3">Hospital Number: {{this.hospitalNumber}}</p>
+  <p class="view3">Score: {{this.totalscore}}</p>
+{{/each}}
+
+<div>
+  {{#if hasErrors}}
+    <p class="error"> {{errors}}.</p>
+
+  {{/if}}
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

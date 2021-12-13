@@ -1,0 +1,74 @@
+<article class="sign-up">
+
+  <h1>
+    Edit Profile
+  </h1>
+
+  <form action="/users/edit/{{userId._id}}" method="POST" id="edit-form">
+   
+    <br />
+    <label for="firstname_1">
+      First Name:
+    </label>
+    <input
+      name="firstname"
+      id="firstname_1"
+      type="text"
+      value="{{userId.firstname}}"
+    /><p id="f_error"></p>
+    <label for="lastname_1">
+      Last Name
+    </label>
+    <input
+      name="lastname"
+      id="lastname_1"
+      type="text"
+      value="{{userId.lastname}}"
+    /><p id="l_error"></p>
+    <br />
+    <label>Gender</label>
+    <select id="gender_1" name="gender">
+      {{! <option value="none" selected>Gender</option> }}
+      <option value="male" selected>Male</option>
+      <option value="female">Female</option>
+      <option value="other">other</option>
+    </select>
+    <p id="gender_error"></p>
+
+    {{! <label class="password-txt" for="email">
+      Email
+    </label>
+    <input name="email" id="email_1" type="email" required />
+    <p id="mail_error"></p> }}
+    <br />
+    <br />
+    <br />
+    <label class="password-txt" for="phonenumber_1">
+      Phone number
+    </label>
+    <input
+      name="phonenumber"
+      id="phonenumber_1"
+      type="tel"
+      value="{{userId.phonenumber}}"
+    />
+    <p id="contact_error"></p>
+
+    <input name="_method" type="hidden" value="PUT" />
+    <input
+      id="submit_button"
+      class="submit-button"
+      type="submit"
+      value="Update"
+    />
+  </form>
+  {{#if error}}
+    <div class="error"></div>
+  {{/if}}
+  <p id="success-edit" hidden>Account updated successfully</p>
+  <p id="user-error" hidden>Either the username or password is incorrect</p>
+</article>
+<form>
+
+  <h2><a id="home" href="http://localhost:3000/users/patient1">Home</a></h2>
+</form>

@@ -1,0 +1,25 @@
+<article class="signup1">
+  <h1> Signup </h1>
+  <form id="signup-form" method="POST" action="/doctorsusers/signup">
+    <label for="username">Username</label>
+    <input id="username" name="username" /><p id="username_error"></p>
+    <label for="password">Password</label>
+    <input id="password" type="password" name="password" /><p
+      id="password_error"
+    ></p>
+    <div>
+      {{#if hasErrors}}
+        <p class="error"> {{errors}}.</p>
+      {{/if}}
+    </div>
+    <label>
+      <input id="btnsubmit" type="submit" value="Submit" />
+    </label>
+    <p class="bottom"><a href="/doctorsusers/login">Already have an account?
+        Click here to log-in</a></p>
+  </form>
+</article>
+<br />
+<br />
+<br />
+<br />

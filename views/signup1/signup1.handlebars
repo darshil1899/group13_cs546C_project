@@ -1,0 +1,102 @@
+<article class="signup1">
+  <h1>Sign up</h1>
+  <form action="/users/signup1" method="POST">
+    <label for="first_name_1">First Name</label>
+    <input
+      type="text"
+      id="first_name_1"
+      name="firstname"
+      placeholder="first name"
+      required
+    /><p id="firstname_error_1"></p>
+    <label for="last_name_1">Last Name</label>
+    <input
+      type="text"
+      id="last_name_1"
+      name="lastname"
+      placeholder="last name"
+      required
+    /><p id="lastname_error_1"></p>
+    <label for="user_name_1">User Name</label>
+    <input
+      type="text"
+      id="user_name_1"
+      name="username"
+      placeholder="user name"
+      required
+    /><p id="username_error_1"></p>
+    <label for="start">Date of Birth</label>
+
+    <input
+      type="date"
+      id="start"
+      name="dateofbirth"
+      
+       min="1905-01-01"
+      max="2021-12-12"
+    /><p id="date_error"></p>
+    <label>Gender</label>
+    <select id="gender" name="gender">
+      {{!-- <option value="none" selected>Gender</option> --}}
+      <option value="male" selected>Male</option>
+      <option value="female">Female</option>
+      <option value="other">other</option>
+    </select>
+    <label for="email_id_1">Email</label>
+    <input
+      type="email"
+      id="email_id_1"
+      name="email"
+      placeholder="Email"
+      required
+    /><br /><p id="email_error_1"></p>
+   <label for="phonenumber">Phone Number</label>
+    <input
+      type="tel"
+      id="phonenumber"
+      name="phonenumber"
+      pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+      required
+    /><br /><br /><p id="phone_error"></p>
+    <label for="password"> Password: </label>
+    <input
+      id="password"
+      name="password"
+      type="password"
+      placeholder="Password"
+      required
+    /><p id="password_error_1"></p>
+    <br /><br />
+    <input id="enter-btn" type="submit" value="Sign up" />
+
+  </form>
+  {{#if error}}
+    <p>{{error}}</p>
+  {{/if}}
+  <p class="font">
+    Already have an account?
+    <br />Click here to login
+    <h2><a href="/users">Login</a></h2>
+  {{!-- <p id="success-signup1" hidden>Account created successfully</p>
+  <p id="suser-error hidden>" Either the username or password is incorrect></p> --}}
+</article><br >
+<br >
+<br >
+<br >
+<br >
+<br >
+<br >
+<br >
+<br >
+<br >
+<br >
+<br >
+<br >
+<br >
+<br >
+
+
+
+
+
+

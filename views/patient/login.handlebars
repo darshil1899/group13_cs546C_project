@@ -1,0 +1,43 @@
+
+<h1 class="hello">
+  Hello, Please Enter valid username and password to login!
+</h1>
+<article class="login1">
+  <h1> Login </h1>
+  <form id="login-form" method="POST" action="/doctorsusers/login">
+    <label for="username">Username</label>
+    <input id="username" name="username" /><p id="username_error"></p>
+    <label for="password">Password</label>
+    <input id="password" type="password" name="password" /><p
+      id="password_error"
+    ></p>
+    <div>
+      {{#if hasErrors}}
+        <p class="error"> {{errors}}</p>
+      {{/if}}
+    </div>
+    <label>
+      
+      <a href="/doctorsusers/signup">Need to register? Click here to sign-up</a>
+
+     
+    </label>
+     <input id="btnsubmit" type="submit" value="Submit" />
+    <p class="bottom"></p>
+  </form>
+
+  <script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"
+  ></script>
+  <script src="/public/js/login.js"></script>
+
+</article>
+<br>
+<br>
+<br>
+<br>
+<br><br>
+<br>
+<br>

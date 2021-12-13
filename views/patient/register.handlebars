@@ -1,0 +1,65 @@
+
+  <br><button onclick="window.location.href='/doctors/view_patients'">View All Patients admitted in Hopsital</button>
+  <br><button onclick="window.location.href='/doctorsusers/get_all_doctor_appointments'">Doctor's check comments</button>
+<nav><button onclick="parent.location='/doctorsusers/logout'">Logout</button></nav>
+  <div class="book">
+    <div class="book-app">
+      <h1><u>Register a Patient here</u></h1>
+      <form action="/doctors/register_patient" method="post">
+        <label for="firstname">First Name</label>
+        <input type="text" name="firstname" id="firstname" placeholder="First name" /><p id="sname_error"></p>
+        <br><br>
+        <label for="lastname">Last Name</label>
+        <input type="text" name="lastname" id="lastname" placeholder="Last name" /><p id="lname_error"></p>
+         <br>
+
+
+        <label for="dateofbirth">Date of Birth</label>
+        <input type="date" name="dateofbirth" id="dateofbirth" min="1905-01-01" max="2021-12-12"/><p id="birthdate_error"></p>
+        <script>function myFunction() {  var today = new Date().toISOString().split('T')[0];
+document.getElementsByName("setTodaysDate")[0].setAttribute('min', today); }</script>
+      
+ <br><br>
+        <label for="sex">Sex</label>
+        <select name="sex" id="sex">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Others</option>
+        </select>
+ <br><br>
+ <label for="emailid">Email id</label>
+        <input type="text" name="emailid" id="emailid" placeholder="Email id" /><p id="error_mail"></p>
+        <br><br>
+        <label for="patientuniquenumber">Patient Unique Number</label>
+        <input
+          type="text"
+          name="patientuniquenumber" id="patientuniquenumber"
+          placeholder="Patient Unique Number"
+        /><p id="unique_error"></p>
+ <br><br>
+       
+
+        <label for="diseasename">Disease name</label>
+        <input type="text" name="diseasename" id="diseasename" placeholder="Disease name" /><p id="disease_error_1"></p>
+ <br><br>
+        <label for="diseasescore">Disease Score</label>
+        <input type="text" name="diseasescore" id="diseasescore" placeholder="Disease Score" /><p id="dscore_error"></p>
+        <div>
+          {{#if hasErrors}}
+            <p class="error"> {{errors}}.</p>
+          {{/if}}
+        </div>
+        <input type="submit" id="register" value="Registar">
+        
+      </form>
+    </div>
+  </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br><br><br>

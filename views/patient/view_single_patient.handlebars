@@ -1,0 +1,46 @@
+<button onclick="window.location.href='/doctors/view_patients'">View All patients</button>
+
+<h1 class="view">Patient info for {{patient.firstname}} {{patient.lastname}}</h1>
+
+<p class="view3">Date of Birth:{{patient.dateOfBirth}}</p>
+<p class="view3">Gender: {{patient.sex}}</p>
+<p class="view3">Patient Unique Number: {{patient.hospitalNumber}}</p>
+<p class="view3">{{patient.emailid}}</p>
+<p class="view3">Room Booked: {{patient.roomBooked}}</p>
+<p class="view3">{{patient.disease_name}}</p>
+<p class="view3">Total Score: {{patient.totalscore}}</p>
+
+{{#each patient.diseases}}
+  <p class="view3">{{this.disease_name}}: <span>{{this.disease_score}}</span></p>
+{{/each}}
+
+<form method="POST" action="/doctors/delete/{{patient._id}}">
+  <button>Delete this patient</button>
+</form>
+<button id="updatePatientInfo">Update Info</button>
+<div id="updateform" hidden>
+  <form action="/doctors/view_patient/{{patient._id}}" method="post">
+    <input type="text" name="diseasename" placeholder="Disease Name" />
+    <input type="text" name="diseasescore" placeholder="Disease Score" />
+    <input type="hidden" name="_method" value="PUT" />
+    <input type="submit" />
+  </form>
+</div>
+
+<div>
+  {{#if hasErrors}}
+    <p class="error"> {{errors}}.</p>
+
+  {{/if}}
+</div>
+
+<form action="/doctors/view_patient/{{patient._id}}/bookRoom" method="POST">
+  <input type="hidden" value="{{patient._id}}" name="patientId" />
+  <input type="submit" value="Book Room" />
+</form>
+
+<script>
+  let form = document.getElementById('updateform'); let button =
+  document.getElementById('updatePatientInfo'); button.onclick = (event) => { if
+  (form.hidden) { form.hidden = false; } else { form.hidden = true; } }
+</script>

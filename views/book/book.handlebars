@@ -1,0 +1,117 @@
+<link rel="stylesheet" href="/public/css/book.css" />
+{{! <script
+      type="text/javascript"
+      src="http://code.jquery.com/jquery-1.7.2.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"
+    ></script> }}
+<script>
+  $(document).ready(function () { $("#txtdate").datepicker({ minDate: 0 }); });
+</script>
+
+<div class="book">
+  <div class="book-app">
+    <h1><u>Book an Appointment</u></h1>
+    <form action="/users/appointment" method="post">
+      <label for="start_name">First Name</label>
+      <input
+        id="start_name"
+        type="text"
+        name="firstname"
+        placeholder="first name"
+        required
+      /><p id="start_error"></p>
+      <label for="end_name">Last Name</label>
+      <input
+        id="end_name"
+        type="text"
+        name="lastname"
+        placeholder="last name"
+        required=""
+      /><p id="end_error"></p>
+      <label for="dob">Date of Birth</label>
+      <input id="dob" type="date" name="dateofbirth" min="1905-01-01" max="2021-12-12" required /><p
+        id="dob_error"
+      ></p>
+      <label for="gender">Gender</label>
+      <select name="gender" id="gender">
+        {{!-- <option value="none" selected>Gender</option> --}}
+        <option value="male" selected>Male</option>
+        <option value="female">Female</option>
+        <option value="other">other</option>
+      </select>
+      <label for="id_mail_">Email</label>
+      <input id="id_mail_" type="email"
+        name="email"
+        placeholder="Email"
+        required/><br /><br /><p id="mailid_error"></p>
+      <label for="contactno">Phone Number</label>
+      <input
+        id="contactno"
+        type="text"
+        name="phonenumber"
+        placeholder="Phone Number"
+        pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+        required
+      />
+      <p id="phone_error"></p>
+      <label for="disease">What's your problem?</label>
+
+      <select name="doctor" id="disease">
+        <option value="none" selected>Choose Disease and Doctor</option>
+        <option value="Koushal Anitha Raja">Hepatitis A -- Koushal Anitha Raja</option>
+        <option value="Koushal Anitha Raja">Hepatitis B -- Koushal Anitha Raja</option>
+        <option value="Inchara Nagaraju">Hepatitis C -- Inchara Nagaraju</option>
+        <option value="Inchara Nagaraju">Hepatitis E -- Inchara Nagaraju</option>
+        <option value="Darshil Sanjay Shah">Palliative Care -- Darshil Sanjay
+          Shah</option>
+        <option value="Darshil Sanjay Shah">Scabies -- Darshil Sanjay Shah</option>
+        <option value="Ami Desai">Scarlet Fever -- Ami Desai</option>
+        <option value="Ami Desai">Adenovirus -- Ami Desai</option>
+        <option value="Saikrishna Sarangan">Campylobacter -- Saikrishna Sarangan</option>
+        <option value="Saikrishna Sarangan">Cryptococcus -- Saikrishna Sarangan</option>
+      </select>
+      {{!-- <h2><a href="public/css/more.html" target="_blank">Know More about the
+          diseases</a></h2> --}}
+      <p class="date">Select Date:</p>
+      <label for="txtdate"></label>
+      <input id="txtdate" name="date" type="date"  min="2021-12-12" max="2029-12-12" required/><p id="txtdate_error">
+      <br>
+      <label for="time">Select Time:</label>
+      <select name="time" id="time">
+        {{!-- <option value="time" id="time" selected>Select Time</option> --}}
+
+        <option value="10:30AM" selected>10:30AM</option>
+        <option value="08:00PM">08:00PM</option>
+      </select><br /><br />
+      <input id="btn-enter" type="submit" value="Book" />
+    </form>
+    {{#if error}}
+
+      <p>{{error}}</p>
+
+    {{/if}}
+  </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<br />

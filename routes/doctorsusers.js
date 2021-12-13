@@ -2,9 +2,11 @@ const express = require("express");
 const router = express.Router();
 const data = require("../data/doctors");
 const diseases = require("../data/disease");
+const appointments = require("../data/users");
 const { restaurants } = require("../config/mongoCollections");
 const connection = require("../config/mongoConnection");
 const doclogin = require("../data/doctor_login");
+const xss = require("xss");
 
 router.get("/", async (req, res) => {
   if (req.session.user) {
@@ -25,10 +27,23 @@ router.get("/main", async (req, res) => {
   }
 });
 
+router.get("/get_all_doctor_appointments", async (req, res) => {
+  try {
+    let allAppointments = await appointments.getAllAppointments();
+    console.log(allAppointments);
+    res.status(200).render("appointment/all_for_doctors", { allAppointments });
+    return;
+  } catch (e) {
+    console.log(e);
+    res.status(400).render("appointment/all_for_doctors");
+    return;
+  }
+});
+
 router.post("/login", async (req, res) => {
   try {
-    let ami = req.body.username;
-    let prathu = req.body.password;
+    let ami = xss(req.body.username);
+    let prathu = xss(req.body.password);
     ami = ami.toLowerCase();
     if (!ami) {
       let errors = "No username provided ";
@@ -95,7 +110,7 @@ router.post("/login", async (req, res) => {
     }
     if (prathu.match(/\s/g)) {
       let errors = "empty spaces!";
-      // todo
+
       res.status(400).render("patient/login", {
         errors: "Invalid password",
         hasErrors: true,
@@ -105,6 +120,8 @@ router.post("/login", async (req, res) => {
     const user = await doclogin.checkUser(ami, prathu);
     if (user.authenticated) {
       req.session.user = ami;
+      req.session.isDoctor = true;
+      // req.session.useremail = User.loggedinuser.emailaddress;
       res.redirect("/doctorsusers/private");
       return;
     }
@@ -221,6 +238,60 @@ router.get("/signup", async (req, res) => {
     return;
   } else {
     res.render("patient/signup");
+  }
+});
+router.get("/login", async (req, res) => {
+  if (req.session.user) {
+    res.redirect("/doctorsusers/private");
+    return;
+  } else {
+    res.render("patient/login");
+  }
+});
+
+router.post("/:id/add_doctors_comment", async (req, res) => {
+  try {
+    req.params.id = xss(req.params.id);
+    let appointmentId = req.params.id;
+    const addAppComment = await appointments.addAppointmentComment(
+      appointmentId,
+      xss(req.body.comment),
+      "doctor"
+    );
+    if (addAppComment) {
+      res.redirect("/doctorsusers/get_all_doctor_appointments");
+      return;
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(400).render("appointment/all_my_appointments", {
+      error: "Something went wrong.",
+    });
+    return;
+  }
+});
+
+router.post("/ajax/login", async (req, res) => {
+  try {
+    let ami = xss(req.body.username);
+    let prathu = xss(req.body.password);
+    ami = ami.toLowerCase();
+   
+    const user = await doclogin.checkUser(ami, prathu);
+    if (user.authenticated) {
+      req.session.user = ami;
+      req.session.isDoctor = true;
+      // req.session.useremail = user.loggedinuser.emailaddress;
+      res.json({ success: true });
+      return;
+    } else {
+      res.status(400).json({ success: false });
+      return;
+    }
+  } catch (e) {
+    console.log(e);
+    res.status(400).json({ success: false });
+    return;
   }
 });
 

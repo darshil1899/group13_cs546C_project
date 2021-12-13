@@ -293,46 +293,6 @@ router.get("/update", async (req, res) => {
 router.put("/edit/:id", async (req, res) => {
   let new_info = req.body;
 
-  // if(!new_info){
-  //     res.status(400).render("update/update",{"error":"Must provide every details"})
-  //     return;
-  // }
-
-  // if(!new_info.firstname){
-  //     res.status(400).render("update/update",{"error":"Must provide every details"})
-  //     return;
-  // }
-
-  // if(!new_info.lastname){
-  //     res.status(400).render("update/update",{"error":"Must provide every details"})
-  //     return;
-  // }
-
-  // if(!new_info.username){
-  //     res.status(400).render("update/update",{"error":"Must provide every details"})
-  //     return;
-  // }
-  // if(!new_info.email){
-  //     res.status(400).render("update/update",{"error":"Must provide every details"})
-  //     return;
-  // }
-  // if(!new_info.city){
-  //     res.status(400).render("update/update",{"error":"Must provide every details"})
-  //     return;
-  // }
-  // if(!new_info.gender){
-  //     res.status(400).render("update/update",{"error":"Must provide every details"})
-  //     return;
-  // }
-  // if(!new_info.phonenumber){
-  //     res.status(400).render("update/update",{"error":"Must provide every details"})
-  //     return;
-  // }
-  // if(!new_info.dateofbirth){
-  //     res.status(400).render("update/update",{"error":"Must provide every details"})
-  //     return;
-  // }
-
   try {
     req.params.id = xss(req.params.id);
     await data.get(req.params.id);
@@ -373,4 +333,8 @@ router.get("/view_my_appointments", async (req, res) => {
   res.render("appointment/all_my_appointments", { myAppointments });
 });
 
+<<<<<<< HEAD
 module.exports = router;
+=======
+module.exports = router;
+>>>>>>> Darshil

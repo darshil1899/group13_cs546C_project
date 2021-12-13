@@ -1,63 +1,63 @@
 <article class="signup1">
   <h1>Sign up</h1>
   <form action="/users/signup1" method="POST">
-    <label>First Name</label>
+    <label for="first_name_1">First Name</label>
     <input
       type="text"
-      id="firstname"
+      id="first_name_1"
       name="firstname"
       placeholder="first name"
       required
-    /><p id="firstname_error"></p>
-    <label>Last Name</label>
+    /><p id="firstname_error_1"></p>
+    <label for="last_name_1">Last Name</label>
     <input
       type="text"
-      id="lastname"
+      id="last_name_1"
       name="lastname"
       placeholder="last name"
       required
-    /><p id="lastname_error"></p>
-    <label>User Name</label>
+    /><p id="lastname_error_1"></p>
+    <label for="user_name_1">User Name</label>
     <input
       type="text"
-      id="username"
+      id="user_name_1"
       name="username"
       placeholder="user name"
       required
-    /><p id="username_error"></p>
+    /><p id="username_error_1"></p>
     <label for="start">Date of Birth</label>
 
     <input
       type="date"
       id="start"
       name="dateofbirth"
-      value="none"
-      min="1905-01-01"
-      max="2021-12-10"
+      
+       min="1905-01-01"
+      max="2021-12-12"
     /><p id="date_error"></p>
     <label>Gender</label>
     <select id="gender" name="gender">
-      <option value="none" selected>Gender</option>
-      <option value="male">Male</option>
+      {{!-- <option value="none" selected>Gender</option> --}}
+      <option value="male" selected>Male</option>
       <option value="female">Female</option>
       <option value="other">other</option>
     </select>
-    <label>Email</label>
+    <label for="email_id_1">Email</label>
     <input
       type="email"
-      id="email"
+      id="email_id_1"
       name="email"
       placeholder="Email"
       required
-    /><br /><p id="email_error"></p>
-    <label>Phone Number</label>
+    /><br /><p id="email_error_1"></p>
+   <label for="phonenumber">Phone Number</label>
     <input
-      type="text"
+      type="tel"
       id="phonenumber"
       name="phonenumber"
-      placeholder="Phone Number"
+      pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
       required
-    /><br /><br /><p id="phonenumber_error"></p>
+    /><br /><br /><p id="phone_error"></p>
     <label for="password"> Password: </label>
     <input
       id="password"
@@ -65,9 +65,9 @@
       type="password"
       placeholder="Password"
       required
-    /><p id="password_error"></p>
+    /><p id="password_error_1"></p>
     <br /><br />
-    <input type="submit" value="Sign up" />
+    <input id="enter-btn" type="submit" value="Sign up" />
 
   </form>
   {{#if error}}
@@ -76,35 +76,27 @@
   <p class="font">
     Already have an account?
     <br />Click here to login
-    <h3><a href="/users/login">Login</a></h3></p>
-  <p id="success-signup1" hidden>Account created successfully</p>
-  <p id="suser-error hidden>" Either the username or password is incorrect></p>
-</article><br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+    <h2><a href="/users">Login</a></h2>
+  {{!-- <p id="success-signup1" hidden>Account created successfully</p>
+  <p id="suser-error hidden>" Either the username or password is incorrect></p> --}}
+</article><br >
+<br >
+<br >
+<br >
+<br >
+<br >
+<br >
+<br >
+<br >
+<br >
+<br >
+<br >
+<br >
+<br >
+<br >
+
+
+
+
+
+

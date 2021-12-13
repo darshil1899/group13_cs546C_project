@@ -6,15 +6,23 @@ const { restaurants } = require("../config/mongoCollections");
 const connection = require("../config/mongoConnection");
 const doclogin = require("../data/doctor_login");
 var nodemailer = require("nodemailer");
-// --------------------------------------------------------------------------------
+const xss = require("xss");
+// --------------------------------------------------------------------------------//
 
 router.get("/view_patient/:id", async (req, res) => {
   try {
-    let userId = req.params.id;
+    
+    if (!req.session.isDoctor) {
+      res.redirect("/main");
+      return;
+    }
+    let userId = xss(req.params.id);
     const patient = await data.get(userId);
+   
     res.status(200).render("patient/view_single_patient", { patient });
     return;
   } catch (e) {
+    console.log(e);
     res.render("patient/view_all_patients", { error: e });
     return;
   }
@@ -22,7 +30,7 @@ router.get("/view_patient/:id", async (req, res) => {
 
 router.post("/view_patient/:id/bookRoom", async (req, res) => {
   try {
-    const book = await data.bookRoom(req.params.id);
+    const book = await data.bookRoom(xss(req.params.id));
     res.redirect(`/doctors/view_patient/${req.params.id}`);
     return;
     // if (book.roomBooked) {
@@ -36,7 +44,7 @@ router.post("/view_patient/:id/bookRoom", async (req, res) => {
 });
 
 router.put("/view_patient/:id", async (req, res) => {
-  if (!req.body.diseasename) {
+  if (xss(!req.body.diseasename)) {
     let errors = "No disease name is provided ";
     res.status(400).render("patient/view_single_patient", {
       errors: "No disease name is provided !",
@@ -44,7 +52,7 @@ router.put("/view_patient/:id", async (req, res) => {
     });
     return;
   }
-  if (!req.body.diseasescore) {
+  if (xss(!req.body.diseasescore)) {
     let errors = "No disease score is provided ";
     res.status(400).render("patient/view_single_patient", {
       errors: "No disease score is provided !",
@@ -53,7 +61,7 @@ router.put("/view_patient/:id", async (req, res) => {
     return;
   }
 
-  if (req.body.diseasename.trim() == "") {
+  if (xss(req.body.diseasename.trim() == "")) {
     let errors = "Do not enter blank values ";
     res.status(400).render("patient/view_single_patient", {
       errors: "Do not enter blank values !",
@@ -62,7 +70,7 @@ router.put("/view_patient/:id", async (req, res) => {
     return;
   }
 
-  if (req.body.diseasescore.trim() == "") {
+  if (xss(req.body.diseasescore.trim() == "")) {
     let errors = "Do not enter blank values ";
     res.status(400).render("patient/view_single_patient", {
       errors: "Do not enter blank values !",
@@ -108,10 +116,11 @@ router.put("/view_patient/:id", async (req, res) => {
   // }
 
   try {
+    req.params.id = xss(req.params.id);
     const updatedDiseases = await diseases.create(
       req.params.id,
-      req.body.diseasename,
-      req.body.diseasescore
+      xss(req.body.diseasename),
+      xss(req.body.diseasescore)
     );
     if (updatedDiseases) {
       res.redirect("/doctors/view_patients");
@@ -210,23 +219,23 @@ router.post("/register_patient", async (req, res) => {
   //   return;
   // }
 
-  // if (payload.patientuniquenumber.trim() == "") {
-  //   let errors = "Patient number cannot be empty ";
-  //   res.status(400).render("patient/register", {
-  //     errors: "Patient number cannot be empty!",
-  //     hasErrors: true,
-  //   });
-  //   return;
-  // }
+  if (payload.patientuniquenumber.trim() == "") {
+    let errors = "Patient number cannot be empty ";
+    res.status(400).render("patient/register", {
+      errors: "Patient number cannot be empty!",
+      hasErrors: true,
+    });
+    return;
+  }
 
-  // if (payload.firstname.trim() == "") {
-  //   let errors = "Room number cannot be empty ";
-  //   res.status(400).render("patient/register", {
-  //     errors: "Room number cannot be empty!",
-  //     hasErrors: true,
-  //   });
-  //   return;
-  // }
+  if (payload.firstname.trim() == "") {
+    let errors = "Room number cannot be empty ";
+    res.status(400).render("patient/register", {
+      errors: "Room number cannot be empty!",
+      hasErrors: true,
+    });
+    return;
+  }
 
   // if (!payload.firstname.match(/\s/g)) {
   //   let errors = "First name cannot be empty ";
@@ -246,32 +255,32 @@ router.post("/register_patient", async (req, res) => {
   //   return;
   // }
 
-  // if (!payload.firstname.match(/^[a-zA-Z]+$/)) {
-  //   let errors = "Please enter only letters ";
-  //   res.status(400).render("patient/register", {
-  //     errors: "Please enter only letters!",
-  //     hasErrors: true,
-  //   });
-  //   return;
-  // }
+  if (!payload.firstname.match(/^[a-zA-Z]+$/)) {
+    let errors = "Please enter only letters ";
+    res.status(400).render("patient/register", {
+      errors: "Please enter only letters!",
+      hasErrors: true,
+    });
+    return;
+  }
 
-  // if (!payload.lastname.match(/^[a-zA-Z]+$/)) {
-  //   let errors = "Please enter only letters ";
-  //   res.status(400).render("patient/register", {
-  //     errors: "Please enter only letters!",
-  //     hasErrors: true,
-  //   });
-  //   return;
-  // }
+  if (!payload.lastname.match(/^[a-zA-Z]+$/)) {
+    let errors = "Please enter only letters ";
+    res.status(400).render("patient/register", {
+      errors: "Please enter only letters!",
+      hasErrors: true,
+    });
+    return;
+  }
 
-  // if (!payload.patientuniquenumber.match(/^\d*$/)) {
-  //   let errors = "Please enter only numbers ";
-  //   res.status(400).render("patient/register", {
-  //     errors: "Please enter only numbers!",
-  //     hasErrors: true,
-  //   });
-  //   return;
-  // }
+  if (!payload.patientuniquenumber.match(/^\d*$/)) {
+    let errors = "Please enter only numbers ";
+    res.status(400).render("patient/register", {
+      errors: "Please enter only numbers!",
+      hasErrors: true,
+    });
+    return;
+  }
 
   // if (!payload.roomnumber.match(/^\d*$/)) {
   //   let errors = "Please enter only numbers ";
@@ -284,8 +293,8 @@ router.post("/register_patient", async (req, res) => {
 
   let diseases = [];
   diseases.push({
-    disease_name: req.body.diseasename,
-    disease_score: parseInt(req.body.diseasescore),
+    disease_name: xss(req.body.diseasename),
+    disease_score: parseInt(xss(req.body.diseasescore)),
   });
 
   var transporter = nodemailer.createTransport({
@@ -338,6 +347,7 @@ router.post("/register_patient", async (req, res) => {
 
 router.post("/delete/:id", async (req, res) => {
   try {
+    req.params.id = xss(req.params.id);
     let pat_id = req.params.id;
     console.log(pat_id);
     const deletedPat = await data.deletepat(pat_id);
